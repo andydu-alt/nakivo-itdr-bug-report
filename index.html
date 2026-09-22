@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bug Report — per product line</title>
+<style>
+  :root{ color-scheme:light;
+    --bg:#f4f6fa; --panel:#fff; --ink:#1f2733; --muted:#6b7686; --line:#e4e8ef;
+    --brand:#1f6feb; --brand-d:#1551b5; --good:#1f9d57; --warn:#e0a106; --bad:#d6443c;
+    --chip:#eef3fb; --shadow:0 1px 3px rgba(20,30,50,.06),0 6px 18px rgba(20,30,50,.05);}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);font-size:14px;line-height:1.5}
+  .top{background:var(--panel);border-bottom:1px solid var(--line);padding:16px 30px;display:flex;align-items:center;gap:18px;position:sticky;top:0;z-index:5}
+  .top .ttl{font-size:18px;font-weight:680}
+  .top .meta{font-size:12px;color:var(--muted);margin-top:2px}
+  .top .right{margin-left:auto;display:flex;gap:10px;align-items:center}
+  .plsel label{font-size:10.5px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);margin-right:6px}
+  .plsel select{border:1px solid var(--line);border-radius:7px;padding:7px 10px;font-size:13px;background:#fff;color:var(--ink);font-weight:600}
+  .pill{font-size:11.5px;padding:6px 11px;border-radius:20px;background:var(--chip);color:var(--brand-d);font-weight:600}
+  .wrap{padding:24px 30px 70px;max-width:1180px}
+  .banner{background:linear-gradient(90deg,#eaf2ff,#f3f8ff);border:1px solid #d4e4ff;border-radius:10px;padding:12px 16px;font-size:12.5px;color:#27425f;margin-bottom:22px;display:flex;gap:10px;align-items:flex-start}
+  .banner b{color:#1551b5}
+  .filters{display:flex;gap:8px;align-items:center;margin-bottom:20px;flex-wrap:wrap}
+  .tabs{display:inline-flex;background:#eef0f4;border-radius:9px;padding:3px}
+  .tabs button{border:0;background:transparent;padding:6px 14px;border-radius:7px;font-size:12.5px;color:var(--muted);cursor:pointer;font-weight:600}
+  .tabs button.on{background:#fff;color:var(--ink);box-shadow:var(--shadow)}
+  .fnote{font-size:11.5px;color:var(--muted);font-weight:600}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-bottom:24px}
+  .kpi{background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:15px 16px;box-shadow:var(--shadow)}
+  .kpi .lbl{font-size:11.5px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.3px}
+  .kpi .val{font-size:26px;font-weight:720;margin-top:7px;letter-spacing:-.5px}
+  .kpi .delta{display:inline-block;font-size:11px;margin-top:8px;font-weight:700;padding:2px 9px;border-radius:20px}
+  .delta.up{background:#fbe3e1;color:#b1322b} .delta.down{background:#e3f3ea;color:#1f7a47} .delta.flat{background:#eef0f4;color:#6b7686}
+  .kpi.wow{border-color:#cfe0fb;background:linear-gradient(180deg,#fbfdff,#f4f8ff)}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px;box-shadow:var(--shadow);margin-bottom:18px}
+  .card h3{margin:0 0 3px;font-size:14.5px;font-weight:680}
+  .card .csub{font-size:11.5px;color:var(--muted);margin-bottom:12px}
+  .legend{display:flex;gap:16px;font-size:11.5px;color:var(--muted);margin-top:8px;flex-wrap:wrap}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .legend i{width:11px;height:11px;border-radius:3px;display:inline-block}
+  table{width:100%;border-collapse:collapse;font-size:12.5px}
+  .pager{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
+  .pager .pagesize{display:flex;align-items:center;gap:6px}
+  .pager .pagesize label{font-size:11px;color:var(--muted);font-weight:600}
+  .pager select{border:1px solid var(--line);border-radius:6px;padding:5px 8px;font-size:12px;background:#fff;color:var(--ink)}
+  .pager .pagebtns{display:flex;align-items:center;gap:10px}
+  .pager button{border:1px solid var(--line);background:#fff;border-radius:6px;padding:5px 12px;font-size:12px;font-weight:600;color:var(--ink);cursor:pointer}
+  .pager button:hover:not(:disabled){background:var(--chip)}
+  .pager button:disabled{opacity:.4;cursor:default}
+  th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line)}
+  th{font-size:10.5px;text-transform:uppercase;letter-spacing:.4px;color:var(--muted);font-weight:700;cursor:pointer;user-select:none}
+  th:hover{color:var(--ink)}
+  tbody tr:hover{background:#fafbfd}
+  .pchip{font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:20px;display:inline-block}
+  .pchip.P1{background:#fbe3e1;color:#b1322b} .pchip.P2{background:#fbeede;color:#9a6a04}
+  .pchip.P3{background:#e7f0fb;color:#2c5d97} .pchip.P4{background:#eef0f4;color:#6b7686} .pchip.P5{background:#eef0f4;color:#9aa4b2}
+  .ttype{font-size:9px;font-weight:700;padding:1px 6px;border-radius:5px;letter-spacing:.3px}
+  .ttype.regression{background:#fbe7e4;color:#b1322b} .ttype.feature{background:#e7f0fb;color:#2c5d97}
+  .wt{font-weight:720} .ctr{text-align:center;white-space:nowrap}
+  .bsum{font-size:12.3px;color:#3b4655;max-width:340px}
+  .ai{background:linear-gradient(180deg,#fbfcfe,#f6f9ff);border:1px solid #e0e9f7;border-left:4px solid var(--brand);border-radius:12px;padding:18px 20px;margin-bottom:18px}
+  .ai .ah{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:720;color:#1551b5;margin-bottom:10px}
+  .ai .ah .badge{font-size:9.5px;background:var(--brand);color:#fff;padding:2px 7px;border-radius:20px;letter-spacing:.4px}
+  .ai p{margin:0 0 9px} .ai ul{margin:6px 0 0;padding-left:20px} .ai li{margin-bottom:5px}
+  .actions{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px 20px;box-shadow:var(--shadow)}
+  .actions h3{margin:0 0 12px;font-size:14px;font-weight:700}
+  .act{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)} .act:last-child{border-bottom:0}
+  .act .pr{font-size:10px;font-weight:700;padding:3px 9px;border-radius:6px;height:fit-content;white-space:nowrap}
+  .pr.P1{background:#fbe3e1;color:#b1322b} .pr.P2{background:#fbeede;color:#9a6a04} .pr.P3{background:#e7f0fb;color:#2c5d97}
+  .act .txt{font-size:12.8px} .act .txt .owner{color:var(--muted);font-size:11.5px;margin-top:2px}
+  .sec{font-size:13px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);margin:6px 0 12px}
+  svg .ax{stroke:#e4e8ef;stroke-width:1} svg .axlbl{fill:#8b96a6;font-size:10px}
+</style>
+</head>
+<body>
+  <div class="top">
+    <div>
+      <div class="ttl" id="ttl">Bug Report</div>
+      <div class="meta" id="meta"></div>
+    </div>
+    <div class="right">
+      <span class="pill">Source: Jira · project NJM</span>
+    </div>
+  </div>
+  <div class="wrap" id="content"></div>
+
+<script>
+/* ===== Set this to YOUR product line (the Jira "Product" field value) — one report per line ===== */
+/* Valid values: M365 · MSP · FNB · Phys/FLB/Share · IT Disaster Recovery · Virt./Cloud Comp. ·
+   DBs/Services/Apps · Sec/Mon · STORaaS/BKaaS · Internal systems · Core (repo & storage) · Core (general) · FLB/Share */
+const PRODUCT = "IT Disaster Recovery";
+
+const WEEKS = ["?", "?", "?", "W39"];
+const COLORS = {Open:"#d6443c",Resolved:"#e0a106",Closed:"#1f9d57"};
+const bugStageReleased = {"Open": [0, 0, 0, 0], "Resolved": [1, 1, 1, 1], "Closed": [42, 42, 42, 42]};
+const bugStageFeature  = {"Open": [6, 6, 6, 6], "Resolved": [3, 3, 3, 3], "Closed": [17, 17, 17, 17]};
+
+/* Priority: P1 = blocks users / some test cases · P2 = critical · P3 = mostly UI */
+const PRIO = { P1:{label:"Blocks users",rank:1}, P2:{label:"Critical",rank:2}, P3:{label:"Mostly UI",rank:3}, P4:{label:"Minor",rank:4}, P5:{label:"Trivial",rank:5} };
+
+/* Sample open-bug list — Weight is the Jira numeric field (default 100, PM-adjustable), read directly.
+   [key, summary, priority, type(regression|feature), status, ageDays, linkedSupportTickets, weight, severity, assignee] */
+const BUGS = [
+  [
+    "NJM-192947",
+    "[Site Recovery] Failback actions incorrectly use CI027 icon instead of Failback CI065",
+    "P3",
+    "feature",
+    "Open",
+    5,
+    0,
+    60,
+    "P3",
+    "Cuong Ngo"
+  ],
+  [
+    "NJM-191120",
+    "[Site Recovery] Networks step - \"Enable network mapping\" is not selected when the corresponding replication job has it enabled",
+    "P2",
+    "feature",
+    "Open",
+    15,
+    3,
+    60,
+    "P3",
+    "Vu Luu"
+  ],
+  [
+    "NJM-179782",
+    "[Site Recovery] Send Email action - Browsing for a new attachment removes previously added files",
+    "P3",
+    "feature",
+    "Open",
+    97,
+    2,
+    73,
+    "P3",
+    "Cuong Ngo"
+  ],
+  [
+    "NJM-179781",
+    "[Site Recovery] Send Email action - Re-selecting a deleted attachment has no effect",
+    "P4",
+    "feature",
+    "Open",
+    97,
+    1,
+    60,
+    "P4",
+    "Chuong Nguyen"
+  ],
+  [
+    "NJM-125751",
+    "New Site Recovery Job Wizard -> Failover VMware VMs. Policy view. Size of replica + Equals + GB. Existing VM replica is not displayed in the Right pane.",
+    "P2",
+    "feature",
+    "Reopened",
+    658,
+    6,
+    60,
+    "P2",
+    "Chuong Nguyen"
+  ],
+  [
+    "NJM-116680",
+    "[11.0][report] Status of Actions on Site recovery report doesnot same as the spec",
+    "P3",
+    "feature",
+    "Reopened",
+    742,
+    1,
+    73,
+    "P3",
+    "Chuong Nguyen"
+  ]
+];
+
+let bugFilter="all", sortKey="prio", sortDir=1;
+let pageSize=25, currentPage=1;
+const $=s=>document.querySelector(s);
+
+function lineChart(series, labels){
+  const W=520,H=240,pad={l:40,r:14,t:14,b:26};
+  const keys=Object.keys(series), all=keys.flatMap(k=>series[k]);
+  const max=Math.max(...all)*1.12, min=0, ix=W-pad.l-pad.r, iy=H-pad.t-pad.b;
+  const xq=i=>pad.l+ix*(i/(labels.length-1)), yq=v=>pad.t+iy*(1-(v-min)/(max-min));
+  let g="";
+  for(let t=0;t<=4;t++){const v=min+(max-min)*t/4,y=yq(v);
+    g+=`<line class="ax" x1="${pad.l}" y1="${y}" x2="${W-pad.r}" y2="${y}"/>`;
+    g+=`<text class="axlbl" x="${pad.l-6}" y="${y+3}" text-anchor="end">${Math.round(v)}</text>`;}
+  labels.forEach((l,i)=>{g+=`<text class="axlbl" x="${xq(i)}" y="${H-8}" text-anchor="middle">${l}</text>`;});
+  keys.forEach(k=>{const c=COLORS[k]||"#1f6feb";
+    g+=`<polyline fill="none" stroke="${c}" stroke-width="2.4" points="${series[k].map((v,i)=>`${xq(i)},${yq(v)}`).join(" ")}"/>`;
+    series[k].forEach((v,i)=>{g+=`<circle cx="${xq(i)}" cy="${yq(v)}" r="3" fill="#fff" stroke="${c}" stroke-width="2"/>`;});});
+  return `<svg viewBox="0 0 ${W} ${H}" width="100%" height="${H}">${g}</svg>`;
+}
+const legend=items=>`<div class="legend">`+items.map(([c,l])=>`<span><i style="background:${c}"></i>${l}</span>`).join("")+`</div>`;
+const kpi=(lbl,val,scope,delta,cls,wow)=>`<div class="kpi ${wow?'wow':''}"><div class="lbl">${lbl}</div><div class="val">${val}</div>${scope?`<div class="kscope">${scope}</div>`:""}${delta?`<div class="delta ${cls}">${delta}</div>`:""}</div>`;
+
+function renderBug(product){
+  const w4=WEEKS.slice(-4);
+  const sl=o=>({Open:o.Open.slice(-4),Resolved:o.Resolved.slice(-4),Closed:o.Closed.slice(-4)});
+  let rows=BUGS.map(b=>{const[key,summary,prio,type,status,age,linked,weight,sev,assignee]=b; return{key,summary,prio,type,status,age,linked,weight,sev:sev||prio,assignee:assignee||"Unassigned",rank:PRIO[prio].rank,sevRank:(PRIO[sev||prio]||PRIO[prio]).rank};});
+  const total=rows.length;
+  if(bugFilter==='reg') rows=rows.filter(r=>r.type==='regression');
+  else if(bugFilter==='feat') rows=rows.filter(r=>r.type==='feature');
+  const filterNote = bugFilter==='reg' ? `Showing ${rows.length} released / regression bugs of ${total}`
+    : bugFilter==='feat' ? `Showing ${rows.length} new-feature bugs of ${total}` : `Showing all ${total} open bugs`;
+  const sortMap={key:r=>r.key,summary:r=>r.summary,prio:r=>r.rank,sev:r=>r.sevRank,type:r=>r.type,status:r=>r.status,age:r=>r.age,linked:r=>r.linked,weight:r=>r.weight,assignee:r=>r.assignee};
+  const sk=sortMap[sortKey]?sortKey:'prio';
+  rows.sort((x,y)=>{
+    const a=sortMap[sk](x),b=sortMap[sk](y);
+    const c=a<b?-1:a>b?1:0;
+    // Weight column: priority → severity always dominate; weight breaks ties within the same tier
+    if(sk==='weight') return (x.rank-y.rank) || (x.sevRank-y.sevRank) || (y.weight-x.weight)*sortDir;
+    // All other columns: primary sort, then priority → severity → weight desc as tiebreakers
+    return c*sortDir || (x.rank-y.rank) || (x.sevRank-y.sevRank) || (y.weight-x.weight);
+  });
+  const arrow=k=> sortKey===k ? (sortDir<0?' ▼':' ▲') : '';
+  const filteredCount=rows.length;
+  const totalPages=pageSize==='all' ? 1 : Math.max(1,Math.ceil(filteredCount/pageSize));
+  if(currentPage>totalPages) currentPage=totalPages;
+  if(currentPage<1) currentPage=1;
+  const pageRows = pageSize==='all' ? rows : rows.slice((currentPage-1)*pageSize, currentPage*pageSize);
+  const rangeStart = filteredCount===0 ? 0 : (pageSize==='all' ? 1 : (currentPage-1)*pageSize+1);
+  const rangeEnd = pageSize==='all' ? filteredCount : Math.min(currentPage*pageSize, filteredCount);
+  const tbody=pageRows.length? pageRows.map(r=>`<tr>
+    <td><a href="http://jira.nakivo.com/browse/${r.key}" target="_blank" style="font-weight:700;color:var(--brand)">${r.key}</a></td><td class="bsum">${r.summary}</td>
+    <td><span class="pchip ${r.prio}">${r.prio}</span></td>
+    <td><span class="pchip ${r.sev}">${r.sev}</span></td>
+    <td><span class="ttype ${r.type}">${r.type==='regression'?'Regression':'New feature'}</span></td>
+    <td>${r.status}</td><td>${r.age}d</td><td class="ctr">${r.linked}</td><td class="wt">${r.weight}</td><td>${r.assignee}</td></tr>`).join("")
+    : `<tr><td colspan="10" style="text-align:center;color:#aab3c2;padding:24px">No bugs match this filter.</td></tr>`;
+  const pageSizeOpts=[10,25,50,100].map(n=>`<option value="${n}" ${pageSize===n?'selected':''}>${n}</option>`).join("")
+    + `<option value="all" ${pageSize==='all'?'selected':''}>All</option>`;
+  const pagination = `
+  <div class="pager">
+    <span class="fnote">Showing ${rangeStart}–${rangeEnd} of ${filteredCount}</span>
+    <span class="pagesize"><label>Rows per page</label><select id="pageSizeSel">${pageSizeOpts}</select></span>
+    <span class="pagebtns">
+      <button id="pagePrev" ${currentPage<=1?'disabled':''}>‹ Prev</button>
+      <span class="fnote">Page ${currentPage} of ${totalPages}</span>
+      <button id="pageNext" ${currentPage>=totalPages?'disabled':''}>Next ›</button>
+    </span>
+  </div>`;
+  const old=BUGS.filter(b=>b[5]>90).sort((a,b)=>b[5]-a[5]).slice(0,10);
+  const oldRows=old.map(b=>`<tr><td><a href="http://jira.nakivo.com/browse/${b[0]}" target="_blank" style="font-weight:700;color:var(--brand)">${b[0]}</a></td><td class="bsum">${b[1]}</td><td><span class="pchip ${b[2]}">${b[2]}</span></td><td><span class="pchip ${b[8]||b[2]}">${b[8]||b[2]}</span></td><td style="color:#d6443c;font-weight:700">${b[5]}d</td><td class="wt">${b[7]}</td><td>${b[9]||"Unassigned"}</td></tr>`).join("");
+  const ranked=BUGS.map(b=>({key:b[0],summary:b[1],prio:b[2],weight:b[7],rank:PRIO[b[2]].rank})).sort((a,b)=>a.rank-b.rank||b.weight-a.weight);
+  const top=ranked[0], over90=BUGS.filter(b=>b[5]>90).length;
+
+  return `
+  <div class="banner">⚑&nbsp;<div><b>${product} — live Jira data.</b> Per the JIRA bug workflow: <b>Priority</b> sets the level, the Jira <b>Weight</b> field orders bugs within a level. Figures are placeholder until the Claude Code Jira pull (filter: <code>project = NJM AND Product = "${product}"</code>) populates them.</div></div>
+
+  <div class="filters">
+    <div class="tabs" id="bugTabs">
+      <button data-f="all" class="${bugFilter==='all'?'on':''}">All bugs</button>
+      <button data-f="reg" class="${bugFilter==='reg'?'on':''}">Released / regression</button>
+      <button data-f="feat" class="${bugFilter==='feat'?'on':''}">New feature</button>
+    </div>
+    <span class="fnote">${filterNote}</span>
+  </div>
+
+    <div class="kpis">
+    ${kpi("Open bugs","6","","","flat",true)}
+    ${kpi("Open P1","0","","","flat",true)}
+    ${kpi("Open P2","2","","","flat",true)}
+    ${kpi("New","0","","","flat")}
+    ${kpi("Resolved","2","","","flat")}
+  </div>
+
+  <h2 class="sec">Bugs by stage over time — last 4 weeks</h2>
+  <div class="grid2">
+    <div class="card"><h3>Released / regression bugs</h3><div class="csub">Bugs in shipped functionality, by stage</div>${lineChart(sl(bugStageReleased),w4)}${legend([[COLORS.Open,"Open"],[COLORS.Resolved,"Resolved"],[COLORS.Closed,"Closed"]])}</div>
+    <div class="card"><h3>New-feature bugs</h3><div class="csub">Bugs in features under development, by stage</div>${lineChart(sl(bugStageFeature),w4)}${legend([[COLORS.Open,"Open"],[COLORS.Resolved,"Resolved"],[COLORS.Closed,"Closed"]])}</div>
+  </div>
+
+  <div class="card">
+    <h3>Prioritized bug queue</h3>
+    <div class="csub">Open and Reopened ${product} bugs only — <b>click any column header to sort</b>. Default order: Priority, then Severity, then Weight descending. Priority and Severity always dominate Weight. Weight is the Jira field (default 100), set by QA/PM.</div>
+    <table id="bugTable"><thead><tr>
+      <th data-k="key">Key${arrow('key')}</th><th data-k="summary">Summary${arrow('summary')}</th>
+      <th data-k="prio">Priority${arrow('prio')}</th><th data-k="sev">Severity${arrow('sev')}</th><th data-k="type">Type${arrow('type')}</th>
+      <th data-k="status">Status${arrow('status')}</th><th data-k="age">Age${arrow('age')}</th>
+      <th data-k="linked" class="ctr">Linked${arrow('linked')}</th><th data-k="weight">Weight${arrow('weight')}</th><th data-k="assignee">Assignee${arrow('assignee')}</th>
+    </tr></thead><tbody>${tbody}</tbody></table>
+    ${pagination}
+  </div>
+
+  <div class="card">
+    <h3>Top 10 bugs older than 3 months</h3>
+    <div class="csub">Oldest open ${product} bugs by age (&gt;90 days) — the long-lived backlog to burn down</div>
+    <table><thead><tr><th>Key</th><th>Summary</th><th>Priority</th><th>Severity</th><th>Age</th><th>Weight</th><th>Assignee</th></tr></thead><tbody>${oldRows}</tbody></table>
+  </div>
+
+  <div class="ai">
+    <div class="ah">✦ AI analysis <span class="badge">AUTO</span></div>
+    <p><b>Top of queue:</b> ${top.key} — ${top.summary} (${top.prio}, Weight ${top.weight}) leads by Priority then Weight.</p>
+    <p><b>Aging:</b> ${over90} open bugs are older than 3 months (see the Top-10 list) — several are P1/P2 carrying real customer/release risk.</p>
+    <p><b>Suggestions:</b></p>
+    <ul>
+      <li>Burn down the aged P1/P2s — e.g. NJM-3650 (immutable lock, 365d) — the long-lived risk leadership flagged.</li>
+      <li>Keep QA/PM Weights current so the within-Priority order stays meaningful.</li>
+    </ul>
+  </div>
+
+  <div class="actions">
+    <h3>◷ Action items</h3>
+    <div class="act"><span class="pr P1">P1</span><div class="txt">Escalate ${top.key} (${top.prio}, W${top.weight}) and the aged P1s to hotfix.<div class="owner">Suggested owner: ${product} lead · due this week</div></div></div>
+    <div class="act"><span class="pr P2">P2</span><div class="txt">Burn down the ${over90} bugs older than 3 months, highest Weight first.<div class="owner">Suggested owner: QA + Dev lead · this sprint</div></div></div>
+    <div class="act"><span class="pr P3">P3</span><div class="txt">Keep Weights updated for actively tracked P1/P2/P3 per the workflow.<div class="owner">Suggested owner: QA / PM · ongoing</div></div></div>
+  </div>`;
+}
+
+function render(){
+  $("#ttl").textContent=`Bug Report — ${PRODUCT}`;
+  $("#meta").textContent=`Reporting week W39 (21 Sep–27 Sep 2026) · assignee: all · live data`;
+  $("#content").innerHTML=renderBug(PRODUCT);
+  document.querySelectorAll("#bugTabs button").forEach(b=>b.onclick=()=>{bugFilter=b.dataset.f; currentPage=1; render();});
+  document.querySelectorAll("#bugTable th").forEach(th=>th.onclick=()=>{const k=th.dataset.k; if(!k) return; if(sortKey===k){sortDir*=-1;}else{sortKey=k;sortDir=(k==='weight'||k==='age'||k==='linked')?-1:1;} currentPage=1; render();});
+  const sizeSel=$("#pageSizeSel");
+  if(sizeSel) sizeSel.onchange=()=>{pageSize=sizeSel.value==='all'?'all':parseInt(sizeSel.value,10); currentPage=1; render();};
+  const prevBtn=$("#pagePrev"), nextBtn=$("#pageNext");
+  if(prevBtn) prevBtn.onclick=()=>{if(currentPage>1){currentPage--; render();}};
+  if(nextBtn) nextBtn.onclick=()=>{currentPage++; render();};
+}
+render();
+</script>
+</body>
+</html>
