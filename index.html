@@ -94,8 +94,8 @@ const PRODUCT = "IT Disaster Recovery";
 
 const WEEKS = ["W36", "W37", "W38", "W39"];
 const COLORS = {Open:"#d6443c",Resolved:"#e0a106",Closed:"#1f9d57"};
-const bugStageReleased = {"Open": [0, 0, 0, 0], "Resolved": [1, 1, 1, 1], "Closed": [41, 42, 42, 42]};
-const bugStageFeature  = {"Open": [4, 5, 6, 6], "Resolved": [3, 3, 3, 3], "Closed": [16, 17, 17, 17]};
+const bugStageReleased = {"Open": [4, 5, 6, 6], "Resolved": [4, 4, 4, 4], "Closed": [54, 56, 56, 56]};
+const bugStageFeature  = {"Open": [0, 0, 0, 0], "Resolved": [0, 0, 0, 0], "Closed": [3, 3, 3, 3]};
 
 /* Priority: P1 = blocks users / some test cases · P2 = critical · P3 = mostly UI */
 const PRIO = { P1:{label:"Blocks users",rank:1}, P2:{label:"Critical",rank:2}, P3:{label:"Mostly UI",rank:3}, P4:{label:"Minor",rank:4}, P5:{label:"Trivial",rank:5} };
@@ -107,7 +107,7 @@ const BUGS = [
     "NJM-192947",
     "[Site Recovery] Failback actions incorrectly use CI027 icon instead of Failback CI065",
     "P3",
-    "feature",
+    "regression",
     "Open",
     5,
     0,
@@ -119,7 +119,7 @@ const BUGS = [
     "NJM-191120",
     "[Site Recovery] Networks step - \"Enable network mapping\" is not selected when the corresponding replication job has it enabled",
     "P2",
-    "feature",
+    "regression",
     "Open",
     15,
     3,
@@ -131,7 +131,7 @@ const BUGS = [
     "NJM-179782",
     "[Site Recovery] Send Email action - Browsing for a new attachment removes previously added files",
     "P3",
-    "feature",
+    "regression",
     "Open",
     97,
     2,
@@ -143,7 +143,7 @@ const BUGS = [
     "NJM-179781",
     "[Site Recovery] Send Email action - Re-selecting a deleted attachment has no effect",
     "P4",
-    "feature",
+    "regression",
     "Open",
     97,
     1,
@@ -155,7 +155,7 @@ const BUGS = [
     "NJM-125751",
     "New Site Recovery Job Wizard -> Failover VMware VMs. Policy view. Size of replica + Equals + GB. Existing VM replica is not displayed in the Right pane.",
     "P2",
-    "feature",
+    "regression",
     "Reopened",
     658,
     6,
@@ -167,7 +167,7 @@ const BUGS = [
     "NJM-116680",
     "[11.0][report] Status of Actions on Site recovery report doesnot same as the spec",
     "P3",
-    "feature",
+    "regression",
     "Reopened",
     742,
     1,
