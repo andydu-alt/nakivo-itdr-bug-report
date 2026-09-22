@@ -92,10 +92,10 @@
    DBs/Services/Apps · Sec/Mon · STORaaS/BKaaS · Internal systems · Core (repo & storage) · Core (general) · FLB/Share */
 const PRODUCT = "IT Disaster Recovery";
 
-const WEEKS = ["?", "?", "?", "W39"];
+const WEEKS = ["W36", "W37", "W38", "W39"];
 const COLORS = {Open:"#d6443c",Resolved:"#e0a106",Closed:"#1f9d57"};
-const bugStageReleased = {"Open": [0, 0, 0, 0], "Resolved": [1, 1, 1, 1], "Closed": [42, 42, 42, 42]};
-const bugStageFeature  = {"Open": [6, 6, 6, 6], "Resolved": [3, 3, 3, 3], "Closed": [17, 17, 17, 17]};
+const bugStageReleased = {"Open": [0, 0, 0, 0], "Resolved": [1, 1, 1, 1], "Closed": [41, 42, 42, 42]};
+const bugStageFeature  = {"Open": [4, 5, 6, 6], "Resolved": [3, 3, 3, 3], "Closed": [16, 17, 17, 17]};
 
 /* Priority: P1 = blocks users / some test cases · P2 = critical · P3 = mostly UI */
 const PRIO = { P1:{label:"Blocks users",rank:1}, P2:{label:"Critical",rank:2}, P3:{label:"Mostly UI",rank:3}, P4:{label:"Minor",rank:4}, P5:{label:"Trivial",rank:5} };
@@ -266,8 +266,8 @@ function renderBug(product){
     ${kpi("Open bugs","6","","","flat",true)}
     ${kpi("Open P1","0","","","flat",true)}
     ${kpi("Open P2","2","","","flat",true)}
-    ${kpi("New","0","","","flat")}
-    ${kpi("Resolved","2","","","flat")}
+    ${kpi("New","0","","▼ 1 vs last week","down")}
+    ${kpi("Resolved","2","","▼ 4 vs last week","up")}
   </div>
 
   <h2 class="sec">Bugs by stage over time — last 4 weeks</h2>
