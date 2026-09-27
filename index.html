@@ -94,7 +94,7 @@ const PRODUCT = "IT Disaster Recovery";
 
 const WEEKS = ["W36", "W37", "W38", "W39"];
 const COLORS = {Open:"#d6443c",Resolved:"#e0a106",Closed:"#1f9d57"};
-const bugStageReleased = {"Open": [4, 5, 6, 6], "Resolved": [4, 4, 4, 4], "Closed": [54, 56, 56, 56]};
+const bugStageReleased = {"Open": [4, 5, 6, 7], "Resolved": [4, 4, 4, 3], "Closed": [54, 56, 56, 57]};
 const bugStageFeature  = {"Open": [0, 0, 0, 0], "Resolved": [0, 0, 0, 0], "Closed": [3, 3, 3, 3]};
 
 /* Priority: P1 = blocks users / some test cases · P2 = critical · P3 = mostly UI */
@@ -109,7 +109,7 @@ const BUGS = [
     "P3",
     "regression",
     "Open",
-    5,
+    10,
     0,
     60,
     "P3",
@@ -121,7 +121,7 @@ const BUGS = [
     "P2",
     "regression",
     "Open",
-    15,
+    20,
     3,
     60,
     "P3",
@@ -133,7 +133,7 @@ const BUGS = [
     "P3",
     "regression",
     "Open",
-    97,
+    103,
     2,
     73,
     "P3",
@@ -145,7 +145,7 @@ const BUGS = [
     "P4",
     "regression",
     "Open",
-    97,
+    103,
     1,
     60,
     "P4",
@@ -157,11 +157,23 @@ const BUGS = [
     "P2",
     "regression",
     "Reopened",
-    658,
+    663,
     6,
     60,
     "P2",
-    "Chuong Nguyen"
+    "Cuong Ngo"
+  ],
+  [
+    "NJM-121855",
+    "[11.0][Site Recovery][Run Job] Error handling for the dropdown is inconsistent with the spec.",
+    "P3",
+    "regression",
+    "Reopened",
+    697,
+    3,
+    100,
+    "P3",
+    "Cuong Ngo"
   ],
   [
     "NJM-116680",
@@ -169,7 +181,7 @@ const BUGS = [
     "P3",
     "regression",
     "Reopened",
-    742,
+    747,
     1,
     73,
     "P3",
@@ -263,11 +275,11 @@ function renderBug(product){
   </div>
 
     <div class="kpis">
-    ${kpi("Open bugs","6","","","flat",true)}
+    ${kpi("Open bugs","7","","▲ 1 vs last week","up",true)}
     ${kpi("Open P1","0","","","flat",true)}
     ${kpi("Open P2","2","","","flat",true)}
     ${kpi("New","0","","▼ 1 vs last week","down")}
-    ${kpi("Resolved","2","","▼ 4 vs last week","up")}
+    ${kpi("Resolved","1","","▼ 5 vs last week","up")}
   </div>
 
   <h2 class="sec">Bugs by stage over time — last 4 weeks</h2>
@@ -315,7 +327,7 @@ function renderBug(product){
 
 function render(){
   $("#ttl").textContent=`Bug Report — ${PRODUCT}`;
-  $("#meta").textContent=`Reporting week W39 (21 Sep–27 Sep 2026) · assignee: all · live data`;
+  $("#meta").textContent=`Reporting week W39 (28 Sep–4 Oct 2026) · assignee: all · live data`;
   $("#content").innerHTML=renderBug(PRODUCT);
   document.querySelectorAll("#bugTabs button").forEach(b=>b.onclick=()=>{bugFilter=b.dataset.f; currentPage=1; render();});
   document.querySelectorAll("#bugTable th").forEach(th=>th.onclick=()=>{const k=th.dataset.k; if(!k) return; if(sortKey===k){sortDir*=-1;}else{sortKey=k;sortDir=(k==='weight'||k==='age'||k==='linked')?-1:1;} currentPage=1; render();});
