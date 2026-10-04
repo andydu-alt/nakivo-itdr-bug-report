@@ -92,10 +92,10 @@
    DBs/Services/Apps · Sec/Mon · STORaaS/BKaaS · Internal systems · Core (repo & storage) · Core (general) · FLB/Share */
 const PRODUCT = "IT Disaster Recovery";
 
-const WEEKS = ["W36", "W37", "W38", "W39"];
+const WEEKS = ["W37", "W38", "W39", "W40"];
 const COLORS = {Open:"#d6443c",Resolved:"#e0a106",Closed:"#1f9d57"};
-const bugStageReleased = {"Open": [4, 5, 6, 7], "Resolved": [4, 4, 4, 3], "Closed": [54, 56, 56, 57]};
-const bugStageFeature  = {"Open": [0, 0, 0, 0], "Resolved": [0, 0, 0, 0], "Closed": [3, 3, 3, 3]};
+const bugStageReleased = {"Open": [5, 6, 7, 5], "Resolved": [4, 4, 3, 4], "Closed": [56, 56, 57, 58]};
+const bugStageFeature  = {"Open": [0, 0, 0, 2], "Resolved": [0, 0, 0, 0], "Closed": [3, 3, 3, 5]};
 
 /* Priority: P1 = blocks users / some test cases · P2 = critical · P3 = mostly UI */
 const PRIO = { P1:{label:"Blocks users",rank:1}, P2:{label:"Critical",rank:2}, P3:{label:"Mostly UI",rank:3}, P4:{label:"Minor",rank:4}, P5:{label:"Trivial",rank:5} };
@@ -104,28 +104,40 @@ const PRIO = { P1:{label:"Blocks users",rank:1}, P2:{label:"Critical",rank:2}, P
    [key, summary, priority, type(regression|feature), status, ageDays, linkedSupportTickets, weight, severity, assignee] */
 const BUGS = [
   [
+    "NJM-195029",
+    "CLONE - [Site Recovery] Permission - ",
+    "P2",
+    "feature",
+    "Open",
+    2,
+    0,
+    100,
+    "P3",
+    "Vu Thanh Hung"
+  ],
+  [
+    "NJM-195005",
+    "[Site Recovery] Activities - Run/stop plan user cannot select or open the plan's activity (Running and Past)",
+    "P2",
+    "feature",
+    "Open",
+    2,
+    2,
+    100,
+    "P3",
+    "Cuong Ngo"
+  ],
+  [
     "NJM-192947",
     "[Site Recovery] Failback actions incorrectly use CI027 icon instead of Failback CI065",
     "P3",
     "regression",
     "Open",
-    10,
+    17,
     0,
     60,
     "P3",
     "Cuong Ngo"
-  ],
-  [
-    "NJM-191120",
-    "[Site Recovery] Networks step - \"Enable network mapping\" is not selected when the corresponding replication job has it enabled",
-    "P2",
-    "regression",
-    "Open",
-    20,
-    3,
-    60,
-    "P3",
-    "Vu Luu"
   ],
   [
     "NJM-179782",
@@ -133,7 +145,7 @@ const BUGS = [
     "P3",
     "regression",
     "Open",
-    103,
+    110,
     2,
     73,
     "P3",
@@ -145,23 +157,11 @@ const BUGS = [
     "P4",
     "regression",
     "Open",
-    103,
+    110,
     1,
     60,
     "P4",
     "Chuong Nguyen"
-  ],
-  [
-    "NJM-125751",
-    "New Site Recovery Job Wizard -> Failover VMware VMs. Policy view. Size of replica + Equals + GB. Existing VM replica is not displayed in the Right pane.",
-    "P2",
-    "regression",
-    "Reopened",
-    663,
-    6,
-    60,
-    "P2",
-    "Cuong Ngo"
   ],
   [
     "NJM-121855",
@@ -169,7 +169,7 @@ const BUGS = [
     "P3",
     "regression",
     "Reopened",
-    697,
+    704,
     3,
     100,
     "P3",
@@ -181,7 +181,7 @@ const BUGS = [
     "P3",
     "regression",
     "Reopened",
-    747,
+    754,
     1,
     73,
     "P3",
@@ -275,11 +275,11 @@ function renderBug(product){
   </div>
 
     <div class="kpis">
-    ${kpi("Open bugs","7","","▲ 1 vs last week","up",true)}
+    ${kpi("Open bugs","7","","","flat",true)}
     ${kpi("Open P1","0","","","flat",true)}
     ${kpi("Open P2","2","","","flat",true)}
-    ${kpi("New","0","","▼ 1 vs last week","down")}
-    ${kpi("Resolved","1","","▼ 5 vs last week","up")}
+    ${kpi("New","4","","▲ 4 vs last week","up")}
+    ${kpi("Resolved","4","","▲ 3 vs last week","down")}
   </div>
 
   <h2 class="sec">Bugs by stage over time — last 4 weeks</h2>
@@ -327,7 +327,7 @@ function renderBug(product){
 
 function render(){
   $("#ttl").textContent=`Bug Report — ${PRODUCT}`;
-  $("#meta").textContent=`Reporting week W39 (28 Sep–4 Oct 2026) · assignee: all · live data`;
+  $("#meta").textContent=`Reporting week W40 (5 Oct–11 Oct 2026) · assignee: all · live data`;
   $("#content").innerHTML=renderBug(PRODUCT);
   document.querySelectorAll("#bugTabs button").forEach(b=>b.onclick=()=>{bugFilter=b.dataset.f; currentPage=1; render();});
   document.querySelectorAll("#bugTable th").forEach(th=>th.onclick=()=>{const k=th.dataset.k; if(!k) return; if(sortKey===k){sortDir*=-1;}else{sortKey=k;sortDir=(k==='weight'||k==='age'||k==='linked')?-1:1;} currentPage=1; render();});
