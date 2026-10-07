@@ -95,7 +95,7 @@ const PRODUCT = "IT Disaster Recovery";
 const WEEKS = ["W37", "W38", "W39", "W40"];
 const COLORS = {Open:"#d6443c",Resolved:"#e0a106",Closed:"#1f9d57"};
 const bugStageReleased = {"Open": [5, 6, 7, 5], "Resolved": [4, 4, 3, 4], "Closed": [56, 56, 57, 58]};
-const bugStageFeature  = {"Open": [0, 0, 0, 2], "Resolved": [0, 0, 0, 0], "Closed": [3, 3, 3, 5]};
+const bugStageFeature  = {"Open": [0, 0, 0, 12], "Resolved": [0, 0, 0, 0], "Closed": [3, 3, 3, 6]};
 
 /* Priority: P1 = blocks users / some test cases · P2 = critical · P3 = mostly UI */
 const PRIO = { P1:{label:"Blocks users",rank:1}, P2:{label:"Critical",rank:2}, P3:{label:"Mostly UI",rank:3}, P4:{label:"Minor",rank:4}, P5:{label:"Trivial",rank:5} };
@@ -104,25 +104,145 @@ const PRIO = { P1:{label:"Blocks users",rank:1}, P2:{label:"Critical",rank:2}, P
    [key, summary, priority, type(regression|feature), status, ageDays, linkedSupportTickets, weight, severity, assignee] */
 const BUGS = [
   [
-    "NJM-195029",
-    "CLONE - [Site Recovery] Permission - ",
-    "P2",
+    "NJM-195827",
+    "[Site Recovery] Plan wizard - Re-IP: empty rule list says \"The job does not use any Re-IP rules.\" instead of \"plan\"",
+    "P4",
     "feature",
     "Open",
-    2,
     0,
+    1,
     100,
     "P3",
     "Vu Thanh Hung"
   ],
   [
-    "NJM-195005",
-    "[Site Recovery] Activities - Run/stop plan user cannot select or open the plan's activity (Running and Past)",
+    "NJM-195820",
+    "[Site Recovery] Plan wizard - Re-IP: \"not available\" note says \"Recover actions\" instead of \"Recover VMs actions\"",
+    "P3",
+    "feature",
+    "Open",
+    0,
+    2,
+    100,
+    "P3",
+    "Vu Luu"
+  ],
+  [
+    "NJM-195819",
+    "[Site Recovery] Plan wizard - Networks: \"not available\" note says \"Recover actions\" instead of \"Recover VMs actions\"",
+    "P3",
+    "feature",
+    "Open",
+    0,
+    3,
+    100,
+    "P3",
+    "Vu Luu"
+  ],
+  [
+    "NJM-195744",
+    "[Site Recovery] [Spec] Plan wizard - Networks: tooltip names a \"Restore VM\" action and is hard to read (punctuation / line breaks)",
+    "P3",
+    "feature",
+    "Open",
+    0,
+    3,
+    100,
+    "P3",
+    "Andy Du"
+  ],
+  [
+    "NJM-195742",
+    "[Site Recovery] [UI] Plan wizard - Options: \"Send test/run report to\" tooltip says \"job\" / \"jobs\" instead of \"plan\" / \"plans\"",
+    "P3",
+    "feature",
+    "Open",
+    0,
+    1,
+    100,
+    "P3",
+    "Vu Luu"
+  ],
+  [
+    "NJM-195738",
+    "[Site Recovery] Plan wizard - Options: \"Send test/run report to\" mouseover reads \"The email settings are not configured\" instead of \"Email settings are not configured\"",
+    "P3",
+    "feature",
+    "Reopened",
+    0,
+    1,
+    100,
+    "P3",
+    "Andy Du"
+  ],
+  [
+    "NJM-195721",
+    "[Site Recovery] [Permission] Users & Roles - Server keeps accepting a disabled user's existing session: API requests still succeed after the user is disabled",
     "P2",
     "feature",
     "Open",
+    0,
+    1,
+    100,
+    "P2",
+    "Hill Pham"
+  ],
+  [
+    "NJM-195717",
+    "[Site Recovery] [UI] New Site Recovery Plan Wizard - Action window: Search icon in the Inventory pane header is not right-aligned",
+    "P3",
+    "feature",
+    "Reopened",
+    0,
+    1,
+    100,
+    "P3",
+    "Vu Thanh Hung"
+  ],
+  [
+    "NJM-195690",
+    "[Site Recovery] [UI] New Site Recovery Plan Wizard - Action window: Selected Items pane empty state is shown at the top instead of the middle",
+    "P3",
+    "feature",
+    "Reopened",
+    0,
+    1,
+    100,
+    "P3",
+    "Vu Thanh Hung"
+  ],
+  [
+    "NJM-195536",
+    "[Site Recovery] [Spec] Permission types and levels - which permission allows \"Rename\" plan (JOBS413 / JOBS414 / JOBS419)",
+    "P3",
+    "feature",
+    "Open",
+    0,
+    4,
+    100,
+    "P3",
+    "Andy Du"
+  ],
+  [
+    "NJM-195370",
+    "[Role Editor] Edit Role - View plan / View job locked at No access after the saved role is reopened",
+    "P3",
+    "feature",
+    "Open",
     2,
-    2,
+    1,
+    100,
+    "P3",
+    "Hill Pham"
+  ],
+  [
+    "NJM-195029",
+    "[Site Recovery] Permission - Edit plan actions = No access - action types show the insufficient-license tooltip instead of the no-permission tooltip",
+    "P3",
+    "feature",
+    "Open",
+    5,
+    1,
     100,
     "P3",
     "Cuong Ngo"
@@ -133,7 +253,7 @@ const BUGS = [
     "P3",
     "regression",
     "Open",
-    17,
+    20,
     0,
     60,
     "P3",
@@ -145,7 +265,7 @@ const BUGS = [
     "P3",
     "regression",
     "Open",
-    110,
+    112,
     2,
     73,
     "P3",
@@ -157,7 +277,7 @@ const BUGS = [
     "P4",
     "regression",
     "Open",
-    110,
+    112,
     1,
     60,
     "P4",
@@ -169,7 +289,7 @@ const BUGS = [
     "P3",
     "regression",
     "Reopened",
-    704,
+    707,
     3,
     100,
     "P3",
@@ -181,7 +301,7 @@ const BUGS = [
     "P3",
     "regression",
     "Reopened",
-    754,
+    757,
     1,
     73,
     "P3",
@@ -275,10 +395,10 @@ function renderBug(product){
   </div>
 
     <div class="kpis">
-    ${kpi("Open bugs","7","","","flat",true)}
+    ${kpi("Open bugs","17","","▲ 10 vs last week","up",true)}
     ${kpi("Open P1","0","","","flat",true)}
-    ${kpi("Open P2","2","","","flat",true)}
-    ${kpi("New","4","","▲ 4 vs last week","up")}
+    ${kpi("Open P2","1","","▼ 1 vs last week","down",true)}
+    ${kpi("New","3","","▲ 3 vs last week","up")}
     ${kpi("Resolved","4","","▲ 3 vs last week","down")}
   </div>
 
@@ -327,7 +447,7 @@ function renderBug(product){
 
 function render(){
   $("#ttl").textContent=`Bug Report — ${PRODUCT}`;
-  $("#meta").textContent=`Reporting week W40 (5 Oct–11 Oct 2026) · assignee: all · live data`;
+  $("#meta").textContent=`Reporting week W40 (28 Sep–4 Oct 2026) · assignee: all · live data`;
   $("#content").innerHTML=renderBug(PRODUCT);
   document.querySelectorAll("#bugTabs button").forEach(b=>b.onclick=()=>{bugFilter=b.dataset.f; currentPage=1; render();});
   document.querySelectorAll("#bugTable th").forEach(th=>th.onclick=()=>{const k=th.dataset.k; if(!k) return; if(sortKey===k){sortDir*=-1;}else{sortKey=k;sortDir=(k==='weight'||k==='age'||k==='linked')?-1:1;} currentPage=1; render();});
