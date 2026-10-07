@@ -95,7 +95,7 @@ const PRODUCT = "IT Disaster Recovery";
 const WEEKS = ["W37", "W38", "W39", "W40"];
 const COLORS = {Open:"#d6443c",Resolved:"#e0a106",Closed:"#1f9d57"};
 const bugStageReleased = {"Open": [5, 6, 7, 5], "Resolved": [4, 4, 3, 4], "Closed": [56, 56, 57, 58]};
-const bugStageFeature  = {"Open": [0, 0, 0, 12], "Resolved": [0, 0, 0, 0], "Closed": [3, 3, 3, 6]};
+const bugStageFeature  = {"Open": [0, 0, 0, 1], "Resolved": [0, 0, 0, 0], "Closed": [3, 3, 3, 5]};
 
 /* Priority: P1 = blocks users / some test cases · P2 = critical · P3 = mostly UI */
 const PRIO = { P1:{label:"Blocks users",rank:1}, P2:{label:"Critical",rank:2}, P3:{label:"Mostly UI",rank:3}, P4:{label:"Minor",rank:4}, P5:{label:"Trivial",rank:5} };
@@ -112,7 +112,7 @@ const BUGS = [
     0,
     1,
     100,
-    "P3",
+    "P4",
     "Vu Thanh Hung"
   ],
   [
@@ -395,9 +395,9 @@ function renderBug(product){
   </div>
 
     <div class="kpis">
-    ${kpi("Open bugs","17","","▲ 10 vs last week","up",true)}
+    ${kpi("Open bugs","6","","▼ 1 vs last week","down",true)}
     ${kpi("Open P1","0","","","flat",true)}
-    ${kpi("Open P2","1","","▼ 1 vs last week","down",true)}
+    ${kpi("Open P2","0","","▼ 2 vs last week","down",true)}
     ${kpi("New","3","","▲ 3 vs last week","up")}
     ${kpi("Resolved","4","","▲ 3 vs last week","down")}
   </div>
@@ -410,7 +410,7 @@ function renderBug(product){
 
   <div class="card">
     <h3>Prioritized bug queue</h3>
-    <div class="csub">Open and Reopened ${product} bugs only — <b>click any column header to sort</b>. Default order: Priority, then Severity, then Weight descending. Priority and Severity always dominate Weight. Weight is the Jira field (default 100), set by QA/PM.</div>
+    <div class="csub">Open and Reopened ${product} bugs, live as of this run — <b>click any column header to sort</b>. Default order: Priority, then Severity, then Weight descending. Priority and Severity always dominate Weight. Weight is the Jira field (default 100), set by QA/PM.</div>
     <table id="bugTable"><thead><tr>
       <th data-k="key">Key${arrow('key')}</th><th data-k="summary">Summary${arrow('summary')}</th>
       <th data-k="prio">Priority${arrow('prio')}</th><th data-k="sev">Severity${arrow('sev')}</th><th data-k="type">Type${arrow('type')}</th>
