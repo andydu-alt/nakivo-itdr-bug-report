@@ -92,10 +92,10 @@
    DBs/Services/Apps · Sec/Mon · STORaaS/BKaaS · Internal systems · Core (repo & storage) · Core (general) · FLB/Share */
 const PRODUCT = "IT Disaster Recovery";
 
-const WEEKS = ["W37", "W38", "W39", "W40"];
+const WEEKS = ["W38", "W39", "W40", "W41"];
 const COLORS = {Open:"#d6443c",Resolved:"#e0a106",Closed:"#1f9d57"};
-const bugStageReleased = {"Open": [5, 6, 7, 5], "Resolved": [4, 4, 3, 4], "Closed": [56, 56, 57, 58]};
-const bugStageFeature  = {"Open": [0, 0, 0, 1], "Resolved": [0, 0, 0, 0], "Closed": [3, 3, 3, 5]};
+const bugStageReleased = {"Open": [6, 7, 5, 5], "Resolved": [4, 3, 4, 3], "Closed": [56, 57, 58, 59]};
+const bugStageFeature  = {"Open": [0, 0, 1, 10], "Resolved": [0, 0, 0, 1], "Closed": [3, 3, 5, 7]};
 
 /* Priority: P1 = blocks users / some test cases · P2 = critical · P3 = mostly UI */
 const PRIO = { P1:{label:"Blocks users",rank:1}, P2:{label:"Critical",rank:2}, P3:{label:"Mostly UI",rank:3}, P4:{label:"Minor",rank:4}, P5:{label:"Trivial",rank:5} };
@@ -104,16 +104,28 @@ const PRIO = { P1:{label:"Blocks users",rank:1}, P2:{label:"Critical",rank:2}, P
    [key, summary, priority, type(regression|feature), status, ageDays, linkedSupportTickets, weight, severity, assignee] */
 const BUGS = [
   [
-    "NJM-195827",
-    "[Site Recovery] Plan wizard - Re-IP: empty rule list says \"The job does not use any Re-IP rules.\" instead of \"plan\"",
-    "P4",
+    "NJM-197654",
+    "[Site Recovery] Permission - Edit plan networks = No access: the blocked \"Enable network mapping\" checkbox has no no-permission tooltip",
+    "P3",
     "feature",
     "Open",
-    0,
+    2,
+    2,
+    100,
+    "P3",
+    "Vu Luu"
+  ],
+  [
+    "NJM-195827",
+    "[Site Recovery] Plan wizard - Re-IP: empty rule list says \"The job does not use any Re-IP rules.\" instead of \"plan\"",
+    "P3",
+    "feature",
+    "Open",
+    4,
     1,
     100,
     "P3",
-    "Vu Thanh Hung"
+    "Vu Luu"
   ],
   [
     "NJM-195820",
@@ -121,7 +133,7 @@ const BUGS = [
     "P3",
     "feature",
     "Open",
-    0,
+    4,
     2,
     100,
     "P3",
@@ -133,7 +145,7 @@ const BUGS = [
     "P3",
     "feature",
     "Open",
-    0,
+    4,
     3,
     100,
     "P3",
@@ -145,11 +157,11 @@ const BUGS = [
     "P3",
     "feature",
     "Open",
-    0,
-    3,
+    4,
+    5,
     100,
     "P3",
-    "Andy Du"
+    "Vu Luu"
   ],
   [
     "NJM-195742",
@@ -157,35 +169,11 @@ const BUGS = [
     "P3",
     "feature",
     "Open",
-    0,
+    4,
     1,
     100,
     "P3",
     "Vu Luu"
-  ],
-  [
-    "NJM-195738",
-    "[Site Recovery] Plan wizard - Options: \"Send test/run report to\" mouseover reads \"The email settings are not configured\" instead of \"Email settings are not configured\"",
-    "P3",
-    "feature",
-    "Reopened",
-    0,
-    1,
-    100,
-    "P3",
-    "Andy Du"
-  ],
-  [
-    "NJM-195721",
-    "[Site Recovery] [Permission] Users & Roles - Server keeps accepting a disabled user's existing session: API requests still succeed after the user is disabled",
-    "P2",
-    "feature",
-    "Open",
-    0,
-    1,
-    100,
-    "P2",
-    "Hill Pham"
   ],
   [
     "NJM-195717",
@@ -193,7 +181,7 @@ const BUGS = [
     "P3",
     "feature",
     "Reopened",
-    0,
+    4,
     1,
     100,
     "P3",
@@ -205,35 +193,23 @@ const BUGS = [
     "P3",
     "feature",
     "Reopened",
-    0,
+    4,
     1,
     100,
     "P3",
     "Vu Thanh Hung"
   ],
   [
-    "NJM-195536",
-    "[Site Recovery] [Spec] Permission types and levels - which permission allows \"Rename\" plan (JOBS413 / JOBS414 / JOBS419)",
-    "P3",
-    "feature",
-    "Open",
-    0,
-    4,
-    100,
-    "P3",
-    "Andy Du"
-  ],
-  [
     "NJM-195370",
     "[Role Editor] Edit Role - View plan / View job locked at No access after the saved role is reopened",
     "P3",
     "feature",
-    "Open",
-    2,
+    "In Progress",
+    6,
     1,
     100,
     "P3",
-    "Hill Pham"
+    "Vu Luu"
   ],
   [
     "NJM-195029",
@@ -241,7 +217,7 @@ const BUGS = [
     "P3",
     "feature",
     "Open",
-    5,
+    9,
     1,
     100,
     "P3",
@@ -253,7 +229,7 @@ const BUGS = [
     "P3",
     "regression",
     "Open",
-    20,
+    24,
     0,
     60,
     "P3",
@@ -265,7 +241,7 @@ const BUGS = [
     "P3",
     "regression",
     "Open",
-    112,
+    117,
     2,
     73,
     "P3",
@@ -277,7 +253,7 @@ const BUGS = [
     "P4",
     "regression",
     "Open",
-    112,
+    117,
     1,
     60,
     "P4",
@@ -289,7 +265,7 @@ const BUGS = [
     "P3",
     "regression",
     "Reopened",
-    707,
+    711,
     3,
     100,
     "P3",
@@ -301,7 +277,7 @@ const BUGS = [
     "P3",
     "regression",
     "Reopened",
-    757,
+    761,
     1,
     73,
     "P3",
@@ -395,11 +371,11 @@ function renderBug(product){
   </div>
 
     <div class="kpis">
-    ${kpi("Open bugs","6","","▼ 1 vs last week","down",true)}
+    ${kpi("Open bugs","15","","▲ 9 vs last week","up",true)}
     ${kpi("Open P1","0","","","flat",true)}
-    ${kpi("Open P2","0","","▼ 2 vs last week","down",true)}
-    ${kpi("New","3","","▲ 3 vs last week","up")}
-    ${kpi("Resolved","4","","▲ 3 vs last week","down")}
+    ${kpi("Open P2","0","","","flat",true)}
+    ${kpi("New","12","","▲ 9 vs last week","up")}
+    ${kpi("Resolved","3","","▼ 1 vs last week","up")}
   </div>
 
   <h2 class="sec">Bugs by stage over time — last 4 weeks</h2>
@@ -447,7 +423,7 @@ function renderBug(product){
 
 function render(){
   $("#ttl").textContent=`Bug Report — ${PRODUCT}`;
-  $("#meta").textContent=`Reporting week W40 (28 Sep–4 Oct 2026) · assignee: all · live data`;
+  $("#meta").textContent=`Reporting week W41 (5 Oct–11 Oct 2026) · assignee: all · live data`;
   $("#content").innerHTML=renderBug(PRODUCT);
   document.querySelectorAll("#bugTabs button").forEach(b=>b.onclick=()=>{bugFilter=b.dataset.f; currentPage=1; render();});
   document.querySelectorAll("#bugTable th").forEach(th=>th.onclick=()=>{const k=th.dataset.k; if(!k) return; if(sortKey===k){sortDir*=-1;}else{sortKey=k;sortDir=(k==='weight'||k==='age'||k==='linked')?-1:1;} currentPage=1; render();});
