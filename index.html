@@ -94,8 +94,8 @@ const PRODUCT = "IT Disaster Recovery";
 
 const WEEKS = ["W39", "W40", "W41", "W42"];
 const COLORS = {Open:"#d6443c",Resolved:"#e0a106",Closed:"#1f9d57"};
-const bugStageReleased = {"Open": [7, 5, 5, 5], "Resolved": [3, 4, 3, 2], "Closed": [57, 58, 59, 60]};
-const bugStageFeature  = {"Open": [0, 1, 10, 11], "Resolved": [0, 0, 1, 0], "Closed": [3, 5, 7, 7]};
+const bugStageReleased = {"Open": [7, 5, 5, 5], "Resolved": [3, 4, 3, 7], "Closed": [57, 58, 59, 55]};
+const bugStageFeature  = {"Open": [0, 1, 10, 4], "Resolved": [0, 0, 1, 0], "Closed": [3, 5, 7, 14]};
 
 /* Priority: P1 = blocks users / some test cases · P2 = critical · P3 = mostly UI */
 const PRIO = { P1:{label:"Blocks users",rank:1}, P2:{label:"Critical",rank:2}, P3:{label:"Mostly UI",rank:3}, P4:{label:"Minor",rank:4}, P5:{label:"Trivial",rank:5} };
@@ -111,7 +111,7 @@ const BUGS = [
     "Open",
     0,
     1,
-    100,
+    60,
     "P3",
     "Hill Pham"
   ],
@@ -123,7 +123,7 @@ const BUGS = [
     "Open",
     1,
     2,
-    100,
+    35,
     "P3",
     "Andy Du"
   ],
@@ -135,7 +135,7 @@ const BUGS = [
     "Open",
     1,
     1,
-    100,
+    28,
     "P3",
     "Andy Du"
   ],
@@ -147,7 +147,7 @@ const BUGS = [
     "Open",
     1,
     4,
-    100,
+    50,
     "P3",
     "Andy Du"
   ],
@@ -159,7 +159,7 @@ const BUGS = [
     "Reopened",
     14,
     5,
-    100,
+    78,
     "P3",
     "Andy Du"
   ],
@@ -171,7 +171,7 @@ const BUGS = [
     "Reopened",
     15,
     1,
-    100,
+    50,
     "P3",
     "Vu Thanh Hung"
   ],
@@ -183,7 +183,7 @@ const BUGS = [
     "Reopened",
     15,
     1,
-    100,
+    50,
     "P3",
     "Vu Thanh Hung"
   ],
@@ -195,7 +195,7 @@ const BUGS = [
     "Open",
     19,
     1,
-    100,
+    21,
     "P3",
     "Cuong Ngo"
   ],
@@ -207,7 +207,7 @@ const BUGS = [
     "Open",
     34,
     0,
-    60,
+    35,
     "P3",
     "Cuong Ngo"
   ],
@@ -219,7 +219,7 @@ const BUGS = [
     "Open",
     127,
     2,
-    73,
+    71,
     "P3",
     "Cuong Ngo"
   ],
@@ -243,7 +243,7 @@ const BUGS = [
     "Reopened",
     722,
     3,
-    100,
+    93,
     "P3",
     "Cuong Ngo"
   ],
@@ -255,7 +255,7 @@ const BUGS = [
     "Reopened",
     771,
     1,
-    73,
+    78,
     "P3",
     "Chuong Nguyen"
   ]
@@ -347,11 +347,11 @@ function renderBug(product){
   </div>
 
     <div class="kpis">
-    ${kpi("Open bugs","16","","▲ 1 vs last week","up",true)}
+    ${kpi("Open bugs","9","","▼ 6 vs last week","down",true)}
     ${kpi("Open P1","0","","","flat",true)}
     ${kpi("Open P2","0","","","flat",true)}
     ${kpi("New","0","","▼ 12 vs last week","down")}
-    ${kpi("Resolved","3","","▼ 2 vs last week","up")}
+    ${kpi("Resolved","1","","▼ 4 vs last week","up")}
   </div>
 
   <h2 class="sec">Bugs by stage over time — last 4 weeks</h2>
