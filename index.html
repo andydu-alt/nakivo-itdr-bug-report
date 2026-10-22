@@ -104,88 +104,64 @@ const PRIO = { P1:{label:"Blocks users",rank:1}, P2:{label:"Critical",rank:2}, P
    [key, summary, priority, type(regression|feature), status, ageDays, linkedSupportTickets, weight, severity, assignee] */
 const BUGS = [
   [
-    "NJM-197654",
-    "[Site Recovery] Permission - Edit plan networks = No access: the blocked \"Enable network mapping\" checkbox has no no-permission tooltip",
-    "P3",
+    "NJM-207833",
+    "[Site Recovery] Recover VMware VMs action - Step 2 Destination: the Container dropdown has no \"Original container\" option",
+    "P2",
     "feature",
-    "In Progress",
-    9,
-    2,
-    100,
-    "P3",
-    "Vu Luu"
-  ],
-  [
-    "NJM-197630",
-    "[Site Recovery] Permission - Edit plan re-ip = No access: the blocked \"Enable Re-IP\" checkbox has no no-permission tooltip",
-    "P3",
-    "feature",
-    "In Progress",
-    9,
-    2,
-    100,
-    "P3",
-    "Vu Luu"
-  ],
-  [
-    "NJM-195827",
-    "[Site Recovery] Plan wizard - Re-IP: empty rule list says \"The job does not use any Re-IP rules.\" instead of \"plan\"",
-    "P3",
-    "feature",
-    "In Progress",
-    11,
+    "Open",
+    0,
     1,
     100,
     "P3",
-    "Vu Luu"
+    "Hill Pham"
   ],
   [
-    "NJM-195820",
-    "[Site Recovery] Plan wizard - Re-IP: \"not available\" note says \"Recover actions\" instead of \"Recover VMs actions\"",
+    "NJM-207570",
+    "[Site Recovery] [Spec] Recover VMware VMs - Step 2 Destination: Network is required, the spec says \"Optional field\"; Need confirm",
     "P3",
     "feature",
-    "In Progress",
-    11,
+    "Open",
+    1,
     2,
     100,
     "P3",
-    "Vu Luu"
+    "Andy Du"
   ],
   [
-    "NJM-195819",
-    "[Site Recovery] Plan wizard - Networks: \"not available\" note says \"Recover actions\" instead of \"Recover VMs actions\"",
+    "NJM-207494",
+    "[Site Recovery] [UI] Recover VMware VMs - Step 2 Destination: Advanced setup tooltips use replication wording (replicas, replicated)",
     "P3",
     "feature",
-    "In Progress",
-    11,
-    3,
+    "Open",
+    1,
+    1,
     100,
     "P3",
-    "Vu Luu"
+    "Andy Du"
+  ],
+  [
+    "NJM-207455",
+    "[Site Recovery] [Spec] Recover VMware VMs - selecting a VM opens the recovery point picker; confirm whether a plan should default to \"Always use the latest recovery point\"",
+    "P3",
+    "feature",
+    "Open",
+    1,
+    4,
+    100,
+    "P3",
+    "Andy Du"
   ],
   [
     "NJM-195744",
     "[Site Recovery] [Spec] Plan wizard - Networks: tooltip names a \"Restore VM\" action and is hard to read (punctuation / line breaks)",
     "P3",
     "feature",
-    "In Progress",
-    11,
+    "Reopened",
+    14,
     5,
     100,
     "P3",
-    "Vu Luu"
-  ],
-  [
-    "NJM-195742",
-    "[Site Recovery] [UI] Plan wizard - Options: \"Send test/run report to\" tooltip says \"job\" / \"jobs\" instead of \"plan\" / \"plans\"",
-    "P3",
-    "feature",
-    "In Progress",
-    11,
-    1,
-    100,
-    "P3",
-    "Vu Luu"
+    "Andy Du"
   ],
   [
     "NJM-195717",
@@ -193,7 +169,7 @@ const BUGS = [
     "P3",
     "feature",
     "Reopened",
-    11,
+    15,
     1,
     100,
     "P3",
@@ -205,23 +181,11 @@ const BUGS = [
     "P3",
     "feature",
     "Reopened",
-    11,
+    15,
     1,
     100,
     "P3",
     "Vu Thanh Hung"
-  ],
-  [
-    "NJM-195370",
-    "[Role Editor] Edit Role - View plan / View job locked at No access after the saved role is reopened",
-    "P3",
-    "feature",
-    "In Progress",
-    13,
-    1,
-    100,
-    "P3",
-    "Vu Luu"
   ],
   [
     "NJM-195029",
@@ -229,7 +193,7 @@ const BUGS = [
     "P3",
     "feature",
     "Open",
-    16,
+    19,
     1,
     100,
     "P3",
@@ -241,7 +205,7 @@ const BUGS = [
     "P3",
     "regression",
     "Open",
-    31,
+    34,
     0,
     60,
     "P3",
@@ -253,7 +217,7 @@ const BUGS = [
     "P3",
     "regression",
     "Open",
-    124,
+    127,
     2,
     73,
     "P3",
@@ -265,7 +229,7 @@ const BUGS = [
     "P4",
     "regression",
     "Open",
-    124,
+    127,
     1,
     60,
     "P4",
@@ -277,7 +241,7 @@ const BUGS = [
     "P3",
     "regression",
     "Reopened",
-    718,
+    722,
     3,
     100,
     "P3",
@@ -289,7 +253,7 @@ const BUGS = [
     "P3",
     "regression",
     "Reopened",
-    768,
+    771,
     1,
     73,
     "P3",
@@ -387,7 +351,7 @@ function renderBug(product){
     ${kpi("Open P1","0","","","flat",true)}
     ${kpi("Open P2","0","","","flat",true)}
     ${kpi("New","0","","▼ 12 vs last week","down")}
-    ${kpi("Resolved","1","","▼ 2 vs last week","up")}
+    ${kpi("Resolved","3","","▼ 2 vs last week","up")}
   </div>
 
   <h2 class="sec">Bugs by stage over time — last 4 weeks</h2>
