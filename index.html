@@ -92,10 +92,10 @@
    DBs/Services/Apps · Sec/Mon · STORaaS/BKaaS · Internal systems · Core (repo & storage) · Core (general) · FLB/Share */
 const PRODUCT = "IT Disaster Recovery";
 
-const WEEKS = ["W39", "W40", "W41", "W42"];
+const WEEKS = ["W40", "W41", "W42", "W43"];
 const COLORS = {Open:"#d6443c",Resolved:"#e0a106",Closed:"#1f9d57"};
-const bugStageReleased = {"Open": [7, 5, 5, 5], "Resolved": [3, 4, 3, 2], "Closed": [57, 58, 59, 60]};
-const bugStageFeature  = {"Open": [0, 1, 10, 11], "Resolved": [0, 0, 1, 0], "Closed": [3, 5, 7, 7]};
+const bugStageReleased = {"Open": [5, 5, 5, 7], "Resolved": [4, 3, 2, 4], "Closed": [58, 59, 60, 59]};
+const bugStageFeature  = {"Open": [1, 10, 11, 7], "Resolved": [0, 1, 0, 0], "Closed": [5, 7, 7, 15]};
 
 /* Priority: P1 = blocks users / some test cases · P2 = critical · P3 = mostly UI */
 const PRIO = { P1:{label:"Blocks users",rank:1}, P2:{label:"Critical",rank:2}, P3:{label:"Mostly UI",rank:3}, P4:{label:"Minor",rank:4}, P5:{label:"Trivial",rank:5} };
@@ -104,28 +104,40 @@ const PRIO = { P1:{label:"Blocks users",rank:1}, P2:{label:"Critical",rank:2}, P
    [key, summary, priority, type(regression|feature), status, ageDays, linkedSupportTickets, weight, severity, assignee] */
 const BUGS = [
   [
+    "NJM-208475",
+    "[Site Recovery] [Plans] Actions widget - action status shows \"Success\", spec says \"Successful\"",
+    "P3",
+    "regression",
+    "Open",
+    2,
+    0,
+    100,
+    "P3",
+    "Vu Luu"
+  ],
+  [
+    "NJM-208231",
+    "[Site Recovery] [UI] Action options - Run this action in label differs from the spec (Action mode)",
+    "P3",
+    "regression",
+    "Open",
+    3,
+    2,
+    100,
+    "P3",
+    "Vu Luu"
+  ],
+  [
     "NJM-207833",
     "[Site Recovery] Recover VMware VMs action - Step 2 Destination: the Container dropdown has no \"Original container\" option",
     "P2",
     "feature",
     "Open",
-    0,
+    4,
     1,
     60,
     "P3",
-    "Hill Pham"
-  ],
-  [
-    "NJM-207570",
-    "[Site Recovery] [Spec] Recover VMware VMs - Step 2 Destination: Network is required, the spec says \"Optional field\"; Need confirm",
-    "P3",
-    "feature",
-    "Open",
-    1,
-    2,
-    35,
-    "P3",
-    "Andy Du"
+    "Vu Luu"
   ],
   [
     "NJM-207494",
@@ -133,11 +145,11 @@ const BUGS = [
     "P3",
     "feature",
     "Open",
-    1,
+    5,
     1,
     28,
     "P3",
-    "Andy Du"
+    "Vu Luu"
   ],
   [
     "NJM-207455",
@@ -145,11 +157,11 @@ const BUGS = [
     "P3",
     "feature",
     "Open",
-    1,
+    5,
     4,
     50,
     "P3",
-    "Andy Du"
+    "Vu Luu"
   ],
   [
     "NJM-195744",
@@ -157,11 +169,11 @@ const BUGS = [
     "P3",
     "feature",
     "Reopened",
-    14,
+    18,
     5,
     78,
     "P3",
-    "Andy Du"
+    "Vu Luu"
   ],
   [
     "NJM-195717",
@@ -169,7 +181,7 @@ const BUGS = [
     "P3",
     "feature",
     "Reopened",
-    15,
+    18,
     1,
     50,
     "P3",
@@ -181,7 +193,7 @@ const BUGS = [
     "P3",
     "feature",
     "Reopened",
-    15,
+    18,
     1,
     50,
     "P3",
@@ -193,7 +205,7 @@ const BUGS = [
     "P3",
     "feature",
     "Open",
-    19,
+    23,
     1,
     21,
     "P3",
@@ -205,7 +217,7 @@ const BUGS = [
     "P3",
     "regression",
     "Open",
-    34,
+    38,
     0,
     35,
     "P3",
@@ -217,7 +229,7 @@ const BUGS = [
     "P3",
     "regression",
     "Open",
-    127,
+    131,
     2,
     71,
     "P3",
@@ -229,7 +241,7 @@ const BUGS = [
     "P4",
     "regression",
     "Open",
-    127,
+    131,
     1,
     60,
     "P4",
@@ -241,7 +253,7 @@ const BUGS = [
     "P3",
     "regression",
     "Reopened",
-    722,
+    725,
     3,
     93,
     "P3",
@@ -253,7 +265,7 @@ const BUGS = [
     "P3",
     "regression",
     "Reopened",
-    771,
+    775,
     1,
     78,
     "P3",
@@ -347,11 +359,11 @@ function renderBug(product){
   </div>
 
     <div class="kpis">
-    ${kpi("Open bugs","16","","▲ 1 vs last week","up",true)}
+    ${kpi("Open bugs","14","","▼ 2 vs last week","down",true)}
     ${kpi("Open P1","0","","","flat",true)}
-    ${kpi("Open P2","0","","","flat",true)}
-    ${kpi("New","0","","▼ 12 vs last week","down")}
-    ${kpi("Resolved","3","","▼ 2 vs last week","up")}
+    ${kpi("Open P2","1","","▲ 1 vs last week","up",true)}
+    ${kpi("New","7","","▲ 7 vs last week","up")}
+    ${kpi("Resolved","12","","▲ 9 vs last week","down")}
   </div>
 
   <h2 class="sec">Bugs by stage over time — last 4 weeks</h2>
@@ -399,7 +411,7 @@ function renderBug(product){
 
 function render(){
   $("#ttl").textContent=`Bug Report — ${PRODUCT}`;
-  $("#meta").textContent=`Reporting week W42 (12 Oct–18 Oct 2026) · assignee: all · live data`;
+  $("#meta").textContent=`Reporting week W43 (19 Oct–25 Oct 2026) · assignee: all · live data`;
   $("#content").innerHTML=renderBug(PRODUCT);
   document.querySelectorAll("#bugTabs button").forEach(b=>b.onclick=()=>{bugFilter=b.dataset.f; currentPage=1; render();});
   document.querySelectorAll("#bugTable th").forEach(th=>th.onclick=()=>{const k=th.dataset.k; if(!k) return; if(sortKey===k){sortDir*=-1;}else{sortKey=k;sortDir=(k==='weight'||k==='age'||k==='linked')?-1:1;} currentPage=1; render();});
