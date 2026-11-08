@@ -92,10 +92,10 @@
    DBs/Services/Apps · Sec/Mon · STORaaS/BKaaS · Internal systems · Core (repo & storage) · Core (general) · FLB/Share */
 const PRODUCT = "IT Disaster Recovery";
 
-const WEEKS = ["W41", "W42", "W43", "W44"];
+const WEEKS = ["W42", "W43", "W44", "W45"];
 const COLORS = {Open:"#d6443c",Resolved:"#e0a106",Closed:"#1f9d57"};
-const bugStageReleased = {"Open": [5, 5, 7, 8], "Resolved": [3, 2, 4, 11], "Closed": [59, 60, 59, 66]};
-const bugStageFeature  = {"Open": [10, 11, 7, 78], "Resolved": [1, 0, 0, 10], "Closed": [7, 7, 15, 141]};
+const bugStageReleased = {"Open": [5, 7, 8, 8], "Resolved": [2, 4, 11, 11], "Closed": [60, 59, 66, 66]};
+const bugStageFeature  = {"Open": [11, 7, 78, 84], "Resolved": [0, 0, 10, 12], "Closed": [7, 15, 141, 148]};
 
 /* Priority: P1 = blocks users / some test cases · P2 = critical · P3 = mostly UI */
 const PRIO = { P1:{label:"Blocks users",rank:1}, P2:{label:"Critical",rank:2}, P3:{label:"Mostly UI",rank:3}, P4:{label:"Minor",rank:4}, P5:{label:"Trivial",rank:5} };
@@ -104,16 +104,148 @@ const PRIO = { P1:{label:"Blocks users",rank:1}, P2:{label:"Critical",rank:2}, P
    [key, summary, priority, type(regression|feature), status, ageDays, linkedSupportTickets, weight, severity, assignee] */
 const BUGS = [
   [
+    "NJM-211246",
+    "[RestoreToEC2] Recovery job for VM with RHEL 8.0 fails - AWS rejects the image import (BLSC-style GRUB found, but unable to detect default kernel)",
+    "P1",
+    "feature",
+    "Open",
+    2,
+    3,
+    100,
+    "P2",
+    "Cuong Ngo"
+  ],
+  [
+    "NJM-211215",
+    "[RestoreToEC2] Recovery job to Amazon EC2 with \"Do not power on recovered instances\": the job completes and the recovered instance is running",
+    "P2",
+    "feature",
+    "Open",
+    3,
+    2,
+    100,
+    "P2",
+    "Cuong Ngo"
+  ],
+  [
+    "NJM-211198",
+    "[RestoreToEC2] Recovery job hangs for VM with SLES 12 SP1 - AWS rejects the image import (ENA must be supported for the region)",
+    "P1",
+    "feature",
+    "Open",
+    3,
+    3,
+    100,
+    "P3",
+    "Cuong Ngo"
+  ],
+  [
+    "NJM-210776",
+    "[RestoreToEC2] Recovery job fails for VM with CentOS 8.0 - error188, AWS rejects the image import",
+    "P1",
+    "feature",
+    "Open",
+    3,
+    2,
+    100,
+    "P2",
+    "Cuong Ngo"
+  ],
+  [
+    "NJM-210615",
+    "[RestoreToEC2] Recovery job: Stop request has no effect while the job waits for the AWS image import - the job stays in \"stopping\" and ends only after 14+ hours",
+    "P1",
+    "feature",
+    "Open",
+    3,
+    2,
+    100,
+    "P1",
+    "Cuong Ngo"
+  ],
+  [
+    "NJM-210148",
+    "[Site Recovery] Recover VMware VMs action - Step 2 Destination: disabled fields have no \"Container is not selected\" mouseover when no Container is selected",
+    "P3",
+    "feature",
+    "Open",
+    5,
+    1,
+    100,
+    "P3",
+    "Vu Luu (DEV)"
+  ],
+  [
+    "NJM-210147",
+    "[Site Recovery] Recover Hyper-V VMs action - Step 2 Destination: Advanced setup Default path is enabled when no Container is selected (should be disabled)",
+    "P3",
+    "feature",
+    "Open",
+    5,
+    1,
+    100,
+    "P3",
+    "Vu Luu (DEV)"
+  ],
+  [
+    "NJM-210138",
+    "[Site Recovery] [UI] Recover Hyper-V VMs action - Step 2 Destination: Container error highlight is still the old style red rectangle, not upgraded to the new style",
+    "P3",
+    "feature",
+    "Open",
+    5,
+    1,
+    100,
+    "P3",
+    "Vu Luu (DEV)"
+  ],
+  [
+    "NJM-210137",
+    "[Site Recovery] Recover Hyper-V VMs action - Step 2 Destination: Container is marked invalid (\"This host does not support virtual hardware version of the selected VM(s)\") and Next is blocked when only a job without backups is selected",
+    "P3",
+    "feature",
+    "Open",
+    5,
+    2,
+    100,
+    "P3",
+    "Vu Luu (DEV)"
+  ],
+  [
+    "NJM-209945",
+    "[RestoreToEC2] Recovery job wizard: the recovery point chosen on the Backups step is reset to \"Always use the latest recovery point\" after the recovery destination is changed to Amazon EC2",
+    "P1",
+    "feature",
+    "In Progress",
+    6,
+    1,
+    100,
+    "P1",
+    "Vu Luu (DEV)"
+  ],
+  [
+    "NJM-209790",
+    "[RestoreToEC2] [UI] Destination step - elements on the same page use different styles (some old, some new), Amazon EC2 is worse",
+    "P3",
+    "feature",
+    "In Progress",
+    6,
+    0,
+    100,
+    "P3",
+    "Vu Luu (DEV)"
+  ],
+  [
     "NJM-209697",
     "[RestoreToEC2] [UI] Instance type step - bulk change applies an instance type that is disabled for the VM (a1.2xlarge on x86 VM), job is saved with it",
     "P2",
     "feature",
-    "Open",
-    2,
+    "In Progress",
+    9,
     1,
     100,
     "P2",
-    "Andy Du"
+    "Vu Luu (DEV)"
   ],
   [
     "NJM-209508",
@@ -121,11 +253,11 @@ const BUGS = [
     "P3",
     "feature",
     "Open",
-    3,
+    10,
     4,
     100,
     "P3",
-    "Hill Pham"
+    "Vu Luu (DEV)"
   ],
   [
     "NJM-209493",
@@ -133,11 +265,11 @@ const BUGS = [
     "P2",
     "feature",
     "Open",
-    3,
+    10,
     2,
     100,
     "P3",
-    "Hill Pham"
+    "Vu Luu (DEV)"
   ],
   [
     "NJM-209105",
@@ -145,11 +277,11 @@ const BUGS = [
     "P2",
     "feature",
     "Open",
-    4,
+    11,
     2,
     100,
     "P3",
-    "Hill Pham"
+    "Cuong Ngo"
   ],
   [
     "NJM-209084",
@@ -157,11 +289,11 @@ const BUGS = [
     "P2",
     "feature",
     "In Progress",
-    4,
+    11,
     5,
     100,
     "P3",
-    "Vu Luu"
+    "Vu Luu (DEV)"
   ],
   [
     "NJM-208852",
@@ -169,11 +301,11 @@ const BUGS = [
     "P2",
     "feature",
     "In Progress",
-    5,
+    12,
     3,
     100,
     "P3",
-    "Vu Luu"
+    "Vu Luu (DEV)"
   ],
   [
     "NJM-208703",
@@ -181,35 +313,11 @@ const BUGS = [
     "P3",
     "regression",
     "Open",
-    6,
+    13,
     3,
     100,
     "P3",
     "Griffin Tran"
-  ],
-  [
-    "NJM-208690",
-    "[Site Recovery] Recover Hyper-V VMs action - Run local pre/post job script is set but not executed",
-    "P2",
-    "feature",
-    "Open",
-    6,
-    13,
-    100,
-    "P3",
-    "Cuong Ngo"
-  ],
-  [
-    "NJM-208624",
-    "[Site Recovery] Recover VMware VMs action - Run local pre/post job script is set but not executed",
-    "P2",
-    "feature",
-    "Reopened",
-    6,
-    10,
-    100,
-    "P3",
-    "Cuong Ngo"
   ],
   [
     "NJM-208475",
@@ -217,11 +325,11 @@ const BUGS = [
     "P3",
     "regression",
     "Open",
-    9,
+    16,
     0,
     100,
     "P3",
-    "Vu Luu"
+    "Vu Luu (DEV)"
   ],
   [
     "NJM-208231",
@@ -229,11 +337,11 @@ const BUGS = [
     "P3",
     "regression",
     "Open",
-    10,
+    17,
     2,
     100,
     "P3",
-    "Vu Luu"
+    "Vu Luu (DEV)"
   ],
   [
     "NJM-207833",
@@ -241,11 +349,11 @@ const BUGS = [
     "P2",
     "feature",
     "In Progress",
-    11,
+    18,
     1,
     60,
     "P3",
-    "Vu Luu"
+    "Vu Luu (DEV)"
   ],
   [
     "NJM-207494",
@@ -253,11 +361,11 @@ const BUGS = [
     "P3",
     "feature",
     "In Progress",
-    12,
+    19,
     1,
     28,
     "P3",
-    "Vu Luu"
+    "Vu Luu (DEV)"
   ],
   [
     "NJM-207455",
@@ -265,11 +373,11 @@ const BUGS = [
     "P3",
     "feature",
     "In Progress",
-    12,
+    19,
     4,
     50,
     "P3",
-    "Vu Luu"
+    "Vu Luu (DEV)"
   ],
   [
     "NJM-195744",
@@ -277,11 +385,11 @@ const BUGS = [
     "P3",
     "feature",
     "In Progress",
-    25,
+    32,
     5,
     78,
     "P3",
-    "Vu Luu"
+    "Vu Luu (DEV)"
   ],
   [
     "NJM-195717",
@@ -289,7 +397,7 @@ const BUGS = [
     "P3",
     "feature",
     "Reopened",
-    25,
+    32,
     1,
     50,
     "P3",
@@ -301,7 +409,7 @@ const BUGS = [
     "P3",
     "feature",
     "Reopened",
-    25,
+    32,
     1,
     50,
     "P3",
@@ -313,7 +421,7 @@ const BUGS = [
     "P3",
     "feature",
     "Open",
-    30,
+    37,
     1,
     21,
     "P3",
@@ -325,7 +433,7 @@ const BUGS = [
     "P3",
     "regression",
     "Open",
-    45,
+    52,
     0,
     35,
     "P3",
@@ -337,7 +445,7 @@ const BUGS = [
     "P3",
     "regression",
     "Open",
-    138,
+    145,
     2,
     71,
     "P3",
@@ -349,7 +457,7 @@ const BUGS = [
     "P4",
     "regression",
     "Open",
-    138,
+    145,
     1,
     60,
     "P4",
@@ -361,11 +469,11 @@ const BUGS = [
     "P2",
     "feature",
     "Open",
-    151,
+    158,
     1,
     85,
     "P2",
-    "Hill Pham"
+    "Vu Luu (DEV)"
   ],
   [
     "NJM-176124",
@@ -373,11 +481,11 @@ const BUGS = [
     "P2",
     "feature",
     "Open",
-    153,
+    160,
     1,
     138,
     "P2",
-    "Hill Pham"
+    "Cuong Ngo"
   ],
   [
     "NJM-173987",
@@ -385,11 +493,11 @@ const BUGS = [
     "P1",
     "feature",
     "Open",
-    163,
+    170,
     2,
     148,
     "P1",
-    "Hill Pham"
+    "Cuong Ngo"
   ],
   [
     "NJM-173486",
@@ -397,47 +505,23 @@ const BUGS = [
     "P2",
     "feature",
     "Open",
-    165,
+    172,
     3,
     139,
     "P2",
-    "Hill Pham"
-  ],
-  [
-    "NJM-172675",
-    "[RestoreToEC2] Full recovery job has failed error169 without reason.",
-    "P2",
-    "feature",
-    "Open",
-    167,
-    0,
-    140,
-    "P2",
-    "Hill Pham"
+    "Thuy Nguyen"
   ],
   [
     "NJM-166936",
     "[RestoreToEC2] Recovery job run failed with UnkownHostException error",
     "P1",
     "feature",
-    "Open",
-    220,
-    2,
+    "Reopened",
+    227,
+    4,
     153,
     "P1",
-    "Hill Pham"
-  ],
-  [
-    "NJM-166899",
-    "[RestoreToEC2] Disk layout in windows is not restored correctly",
-    "P2",
-    "feature",
-    "Open",
-    221,
-    5,
-    144,
-    "P2",
-    "Hill Pham"
+    "Cuong Ngo"
   ],
   [
     "NJM-164520",
@@ -445,11 +529,11 @@ const BUGS = [
     "P2",
     "feature",
     "Open",
-    242,
-    1,
+    249,
+    2,
     111,
     "P2",
-    "Hill Pham"
+    "Cuong Ngo"
   ],
   [
     "NJM-164504",
@@ -457,11 +541,11 @@ const BUGS = [
     "P2",
     "feature",
     "Open",
-    242,
-    1,
+    249,
+    2,
     112,
     "P1",
-    "Hill Pham"
+    "Cuong Ngo"
   ],
   [
     "NJM-164494",
@@ -469,11 +553,11 @@ const BUGS = [
     "P1",
     "feature",
     "Open",
-    242,
+    249,
     2,
     158,
     "P1",
-    "Hill Pham"
+    "Cuong Ngo"
   ],
   [
     "NJM-164493",
@@ -481,11 +565,11 @@ const BUGS = [
     "P2",
     "feature",
     "Open",
-    242,
+    249,
     2,
     145,
     "P1",
-    "Hill Pham"
+    "Cuong Ngo"
   ],
   [
     "NJM-163752",
@@ -493,23 +577,23 @@ const BUGS = [
     "P2",
     "feature",
     "Open",
-    251,
+    258,
     1,
     89,
     "P2",
-    "Hill Pham"
+    "Vu Luu (DEV)"
   ],
   [
     "NJM-163075",
     "[RestoreToEC2] UI - Wizard - Bulk action: Disk type is selected automatically; \"Subnet\" & \"Security group\" are optional not required; Incorrect mouseover text",
     "P3",
     "feature",
-    "Open",
-    263,
+    "In Progress",
+    270,
     2,
     58,
     "P3",
-    "Hill Pham"
+    "Vu Luu (DEV)"
   ],
   [
     "NJM-163052",
@@ -517,11 +601,11 @@ const BUGS = [
     "P3",
     "feature",
     "Open",
-    263,
+    270,
     1,
     60,
     "P3",
-    "Hill Pham"
+    "Vu Luu (DEV)"
   ],
   [
     "NJM-163048",
@@ -529,11 +613,11 @@ const BUGS = [
     "P2",
     "feature",
     "Open",
-    263,
+    270,
     1,
     90,
     "P3",
-    "Hill Pham"
+    "Vu Luu (DEV)"
   ],
   [
     "NJM-163047",
@@ -541,11 +625,11 @@ const BUGS = [
     "P3",
     "feature",
     "Reopened",
-    263,
+    270,
     1,
     53,
     "P3",
-    "Hill Pham"
+    "Vu Luu (DEV)"
   ],
   [
     "NJM-163046",
@@ -553,11 +637,11 @@ const BUGS = [
     "P3",
     "feature",
     "Reopened",
-    263,
+    270,
     2,
     54,
     "P3",
-    "Hill Pham"
+    "Vu Luu (DEV)"
   ],
   [
     "NJM-163038",
@@ -565,11 +649,11 @@ const BUGS = [
     "P3",
     "feature",
     "Open",
-    263,
+    270,
     1,
     46,
     "P3",
-    "Hill Pham"
+    "Vu Luu (DEV)"
   ],
   [
     "NJM-163011",
@@ -577,11 +661,11 @@ const BUGS = [
     "P3",
     "feature",
     "Open",
-    263,
+    270,
     2,
     47,
     "P3",
-    "Hill Pham"
+    "Vu Luu (DEV)"
   ],
   [
     "NJM-162878",
@@ -589,11 +673,11 @@ const BUGS = [
     "P2",
     "feature",
     "Reopened",
-    265,
+    272,
     1,
     87,
     "P2",
-    "Hill Pham"
+    "Vu Luu (DEV)"
   ],
   [
     "NJM-162872",
@@ -601,11 +685,11 @@ const BUGS = [
     "P3",
     "feature",
     "Open",
-    265,
+    272,
     1,
     49,
     "P3",
-    "Hill Pham"
+    "Vu Luu (DEV)"
   ],
   [
     "NJM-162866",
@@ -613,11 +697,11 @@ const BUGS = [
     "P2",
     "feature",
     "Open",
-    265,
+    272,
     1,
     86,
     "P2",
-    "Hill Pham"
+    "Vu Luu (DEV)"
   ],
   [
     "NJM-162828",
@@ -625,11 +709,11 @@ const BUGS = [
     "P3",
     "feature",
     "Open",
-    268,
+    275,
     4,
     61,
     "P3",
-    "Hill Pham"
+    "Vu Luu (DEV)"
   ],
   [
     "NJM-162822",
@@ -637,47 +721,47 @@ const BUGS = [
     "P3",
     "feature",
     "Open",
-    268,
+    275,
     1,
     50,
     "P3",
-    "Hill Pham"
+    "Vu Luu (DEV)"
   ],
   [
     "NJM-162819",
     "[RestoreToEC2] UI - wizard -step 4 - Disk - Provisioned IOPS SSD (io1) - Max value is 64000",
     "P3",
     "feature",
-    "Open",
-    268,
+    "In Progress",
+    275,
     2,
     51,
     "P3",
-    "Hill Pham"
+    "Vu Luu (DEV)"
   ],
   [
     "NJM-162817",
     "[RestoreToEC2] Wizard - Step 4 - Disk - Bulk Action - Disk Type - Disk Value - Invalid value still be applied.",
     "P3",
     "feature",
-    "Open",
-    268,
+    "In Progress",
+    275,
     1,
     62,
     "P2",
-    "Hill Pham"
+    "Vu Luu (DEV)"
   ],
   [
     "NJM-162815",
     "[RestoreToEC2] UI - wizard -step 4 - Disk - Value column - The number is move up & right when clicking to it",
     "P3",
     "feature",
-    "Open",
-    268,
+    "In Progress",
+    275,
     1,
     52,
     "P3",
-    "Hill Pham"
+    "Vu Luu (DEV)"
   ],
   [
     "NJM-162786",
@@ -685,23 +769,11 @@ const BUGS = [
     "P3",
     "feature",
     "Open",
-    268,
+    275,
     7,
     63,
     "P2",
-    "Hill Pham"
-  ],
-  [
-    "NJM-162773",
-    "[11.2][RestoreToEC2] The error message is not displayed when the Full recovery job for Amazon EC2 has failled.",
-    "P2",
-    "feature",
-    "Reopened",
-    268,
-    1,
-    104,
-    "P2",
-    "Hill Pham"
+    "Vu Luu (DEV)"
   ],
   [
     "NJM-121855",
@@ -709,7 +781,7 @@ const BUGS = [
     "P3",
     "regression",
     "Reopened",
-    732,
+    739,
     3,
     93,
     "P3",
@@ -721,7 +793,7 @@ const BUGS = [
     "P3",
     "regression",
     "Reopened",
-    782,
+    789,
     1,
     78,
     "P3",
@@ -732,36 +804,36 @@ const BUGS = [
     "[RestoreToEC2] VM with more than 1 disks. Disk type can be selected for disk of unsupported size.",
     "P2",
     "feature",
-    "Reopened",
-    803,
+    "In Progress",
+    810,
     1,
     97,
     "P2",
-    "Hill Pham"
+    "Vu Luu (DEV)"
   ],
   [
     "NJM-114998",
     "[RestoreToEC2] Recovery for VM with 100Mb disk.",
     "P2",
     "feature",
-    "Reopened",
-    804,
+    "In Progress",
+    811,
     3,
     98,
     "P2",
-    "Hill Pham"
+    "Vu Luu (DEV)"
   ],
   [
     "NJM-114892",
     "[RestoreToEC2] Recovery to EC2 job fails for VM with swap partition at the beginning of the disk.",
     "P2",
     "feature",
-    "Open",
-    808,
+    "Reopened",
+    815,
     1,
     115,
     "P2",
-    "Hill Pham"
+    "Vu Thanh Hung"
   ],
   [
     "NJM-114765",
@@ -769,11 +841,11 @@ const BUGS = [
     "P2",
     "feature",
     "Reopened",
-    809,
+    816,
     3,
     131,
     "P2",
-    "Hill Pham"
+    "Cuong Ngo"
   ],
   [
     "NJM-114751",
@@ -781,11 +853,11 @@ const BUGS = [
     "P2",
     "feature",
     "Reopened",
-    809,
+    816,
     3,
     116,
     "P2",
-    "Hill Pham"
+    "Cuong Ngo"
   ],
   [
     "NJM-114710",
@@ -793,23 +865,23 @@ const BUGS = [
     "P2",
     "feature",
     "Reopened",
-    809,
+    816,
     5,
     117,
     "P2",
-    "Hill Pham"
+    "Cuong Ngo"
   ],
   [
     "NJM-113912",
     "[RestoreToEC2] Recovery job fails for VM with 20 Tb disk.",
     "P2",
     "feature",
-    "Open",
-    818,
-    1,
+    "In Progress",
+    825,
+    0,
     118,
     "P2",
-    "Hill Pham"
+    "Vu Luu (DEV)"
   ],
   [
     "NJM-113911",
@@ -817,11 +889,11 @@ const BUGS = [
     "P2",
     "feature",
     "Reopened",
-    818,
+    825,
     2,
     109,
     "P2",
-    "Hill Pham"
+    "Cuong Ngo"
   ],
   [
     "NJM-113910",
@@ -829,11 +901,11 @@ const BUGS = [
     "P2",
     "feature",
     "Reopened",
-    818,
+    825,
     1,
     110,
     "P2",
-    "Hill Pham"
+    "Cuong Ngo"
   ],
   [
     "NJM-113787",
@@ -841,23 +913,23 @@ const BUGS = [
     "P2",
     "feature",
     "Reopened",
-    821,
+    828,
     0,
     119,
     "P2",
-    "Hill Pham"
+    "Cuong Ngo"
   ],
   [
     "NJM-113784",
     "[RestoreToEC2] Job options. Step 4 - Disk. Recovery job can be created/saved without a Disk type, and the field is then locked on edit",
     "P2",
     "feature",
-    "Open",
-    821,
+    "In Progress",
+    828,
     1,
     100,
     "P2",
-    "Hill Pham"
+    "Vu Luu (DEV)"
   ],
   [
     "NJM-113781",
@@ -865,11 +937,11 @@ const BUGS = [
     "P2",
     "feature",
     "Reopened",
-    821,
-    0,
+    828,
+    1,
     120,
     "P2",
-    "Hill Pham"
+    "Cuong Ngo"
   ],
   [
     "NJM-113454",
@@ -877,35 +949,23 @@ const BUGS = [
     "P1",
     "feature",
     "Reopened",
-    825,
+    832,
     4,
     154,
     "P2",
-    "Hill Pham"
-  ],
-  [
-    "NJM-113150",
-    "[RestoreToEC2] Recovery job fails for VM with volume of FAT32 file system.",
-    "P2",
-    "feature",
-    "Reopened",
-    830,
-    2,
-    132,
-    "P2",
-    "Hill Pham"
+    "Cuong Ngo"
   ],
   [
     "NJM-113148",
     "[RestoreToEC2] Recovery job fails for VM with volume of JFS file system.",
     "P2",
     "feature",
-    "Open",
-    830,
+    "Reopened",
+    837,
     2,
     122,
     "P2",
-    "Hill Pham"
+    "Vu Thanh Hung"
   ],
   [
     "NJM-113147",
@@ -913,35 +973,35 @@ const BUGS = [
     "P2",
     "feature",
     "Reopened",
-    830,
-    2,
+    837,
+    1,
     133,
     "P2",
-    "Hill Pham"
+    "Vu Thanh Hung"
   ],
   [
     "NJM-112924",
     "[RestoreToEC2] Recovery job fails for VM with lvm RAID4.",
     "P2",
     "feature",
-    "Open",
-    831,
+    "Reopened",
+    838,
     2,
     123,
     "P2",
-    "Hill Pham"
+    "Vu Thanh Hung"
   ],
   [
     "NJM-112833",
     "[RestoreToEC2] Recovery job fails for VM with lvm RAID1.",
     "P2",
     "feature",
-    "Open",
-    832,
+    "Reopened",
+    839,
     2,
     124,
     "P2",
-    "Hill Pham"
+    "Vu Thanh Hung"
   ],
   [
     "NJM-112790",
@@ -949,23 +1009,23 @@ const BUGS = [
     "P2",
     "feature",
     "Open",
-    835,
-    15,
+    842,
+    22,
     125,
     "P2",
-    "Hill Pham"
+    "Cuong Ngo"
   ],
   [
     "NJM-112730",
     "[RestoreToEC2] Recovery job fails for VM with lvm RAID6.",
     "P2",
     "feature",
-    "Open",
-    836,
+    "Reopened",
+    843,
     1,
     126,
     "P2",
-    "Hill Pham"
+    "Vu Thanh Hung"
   ],
   [
     "NJM-110043",
@@ -973,11 +1033,11 @@ const BUGS = [
     "P2",
     "feature",
     "Reopened",
-    872,
+    879,
     2,
     134,
     "P2",
-    "Hill Pham"
+    "Vu Thanh Hung"
   ],
   [
     "NJM-109962",
@@ -985,47 +1045,47 @@ const BUGS = [
     "P2",
     "feature",
     "Open",
-    874,
+    881,
     0,
     127,
     "P2",
-    "Hill Pham"
+    "Cuong Ngo"
   ],
   [
     "NJM-109955",
     "[RestoreToEC2] Recovery job fails for VM with mirror and stripped logical volume.",
     "P2",
     "feature",
-    "Open",
-    874,
+    "Reopened",
+    881,
     3,
     128,
     "P2",
-    "Hill Pham"
+    "Vu Thanh Hung"
   ],
   [
     "NJM-109622",
     "[RestoreToEC2] Recovery job fails for VM with cache logical volume.",
     "P2",
     "feature",
-    "Open",
-    880,
+    "Reopened",
+    887,
     2,
     129,
     "P2",
-    "Hill Pham"
+    "Vu Thanh Hung"
   ],
   [
     "NJM-109509",
     "[RestoreToEC2] Recovery job fails for VM with 15 disks.",
     "P2",
     "feature",
-    "Open",
-    882,
-    2,
+    "Reopened",
+    889,
+    3,
     130,
     "P2",
-    "Hill Pham"
+    "Vu Thanh Hung"
   ],
   [
     "NJM-101599",
@@ -1033,11 +1093,11 @@ const BUGS = [
     "P2",
     "feature",
     "Reopened",
-    985,
+    992,
     6,
     105,
     "P2",
-    "Hill Pham"
+    "Vu Thanh Hung"
   ],
   [
     "NJM-101551",
@@ -1045,11 +1105,11 @@ const BUGS = [
     "P2",
     "feature",
     "Reopened",
-    986,
+    993,
     3,
     106,
     "P2",
-    "Hill Pham"
+    "Cuong Ngo"
   ],
   [
     "NJM-100888",
@@ -1057,11 +1117,11 @@ const BUGS = [
     "P1",
     "feature",
     "Reopened",
-    1003,
+    1010,
     1,
     100,
     "P1",
-    "Hill Pham"
+    "Cuong Ngo"
   ],
   [
     "NJM-100413",
@@ -1069,23 +1129,35 @@ const BUGS = [
     "P2",
     "feature",
     "Reopened",
-    1006,
+    1013,
     1,
     91,
     "P2",
-    "Hill Pham"
+    "Vu Luu (DEV)"
   ],
   [
     "NJM-99195",
     "[RestoreToEC2] Comparing with V*. Not bootable VM with disk size over 50Gb. Job is failed with unclear reason. For V* similar job has clear reason. Nakivo vm import time is much longer.",
     "P2",
     "feature",
-    "Open",
-    1024,
+    "Reopened",
+    1031,
     2,
     102,
     "P2",
-    "Hill Pham"
+    "Vu Thanh Hung"
+  ],
+  [
+    "NJM-95827",
+    "[RestoreToEC2] Jobs.log and controller-aws.log files don't contain any information about the operations (requests) happening after the data transfer is completed",
+    "P1",
+    "feature",
+    "Reopened",
+    1077,
+    3,
+    100,
+    "P2",
+    "Cuong Ngo"
   ],
   [
     "NJM-95687",
@@ -1093,11 +1165,11 @@ const BUGS = [
     "P2",
     "feature",
     "Reopened",
-    1074,
+    1081,
     1,
     100,
     "P2",
-    "Hill Pham"
+    "Cuong Ngo"
   ],
   [
     "NJM-92284",
@@ -1105,11 +1177,11 @@ const BUGS = [
     "P2",
     "feature",
     "Reopened",
-    1109,
-    2,
+    1116,
+    4,
     107,
     "P2",
-    "Hill Pham"
+    "Cuong Ngo"
   ],
   [
     "NJM-91062",
@@ -1117,23 +1189,23 @@ const BUGS = [
     "P2",
     "feature",
     "Reopened",
-    1110,
+    1117,
     0,
     103,
     "P2",
-    "Hill Pham"
+    "Cuong Ngo"
   ],
   [
     "NJM-84610",
     "[RestoreToEC2] Recovery job wizard . Step 2 - Destination. \"Recover to:\" pop-up does not match with others.",
     "P2",
     "feature",
-    "Reopened",
-    1174,
+    "In Progress",
+    1181,
     0,
     88,
     "P2",
-    "Hill Pham"
+    "Vu Luu (DEV)"
   ]
 ];
 
@@ -1223,11 +1295,11 @@ function renderBug(product){
   </div>
 
     <div class="kpis">
-    ${kpi("Open bugs","86","","▲ 72 vs last week","up",true)}
-    ${kpi("Open P1","5","","▲ 5 vs last week","up",true)}
-    ${kpi("Open P2","53","","▲ 52 vs last week","up",true)}
-    ${kpi("New","22","","▲ 15 vs last week","up")}
-    ${kpi("Resolved","16","","▲ 4 vs last week","down")}
+    ${kpi("Open bugs","92","","▲ 6 vs last week","up",true)}
+    ${kpi("Open P1","11","","▲ 6 vs last week","up",true)}
+    ${kpi("Open P2","48","","▼ 5 vs last week","down",true)}
+    ${kpi("New","15","","▼ 7 vs last week","down")}
+    ${kpi("Resolved","11","","▼ 5 vs last week","up")}
   </div>
 
   <h2 class="sec">Bugs by stage over time — last 4 weeks</h2>
@@ -1275,7 +1347,7 @@ function renderBug(product){
 
 function render(){
   $("#ttl").textContent=`Bug Report — ${PRODUCT}`;
-  $("#meta").textContent=`Reporting week W44 (26 Oct–1 Nov 2026) · assignee: all · live data`;
+  $("#meta").textContent=`Reporting week W45 (2 Nov–8 Nov 2026) · assignee: all · live data`;
   $("#content").innerHTML=renderBug(PRODUCT);
   document.querySelectorAll("#bugTabs button").forEach(b=>b.onclick=()=>{bugFilter=b.dataset.f; currentPage=1; render();});
   document.querySelectorAll("#bugTable th").forEach(th=>th.onclick=()=>{const k=th.dataset.k; if(!k) return; if(sortKey===k){sortDir*=-1;}else{sortKey=k;sortDir=(k==='weight'||k==='age'||k==='linked')?-1:1;} currentPage=1; render();});
